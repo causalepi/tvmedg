@@ -19,3 +19,5 @@ You can install the development version of tvmedg like so:
 # install.packages("devtools")
 devtools::install_github("causalepi/tvmedg")
 ```
+
+## Tutorial

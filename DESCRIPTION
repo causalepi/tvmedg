@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: c(
     person("Nguyen", "Pham Nguyen The", email = "nguyenpnt@oucru.org", role = c("aut","cre"),comment = c(ORCID = "0000-0002-0356-2776")),
     person("Thinh", "Ong", email = "thinhop@oucru.org", role = "aut", comment = c(ORCID = "0000-0001-6772-9291")),
-    person("Long", "Khuong", email = "khuongquynhlong@gmail.com", role = c("aut","cph"))
+    person("Long", "Khuong", email = "khuongquynhlong@gmail.com", role = c("aut","cph"), comment = c(ORCID = "0000-0002-1232-6230"))
   )
 Maintainer: Nguyen Pham Nguyen The <nguyenpnt@oucru.org>
 Description: Time-varying mediation analysis using g-computation.
@@ -14,12 +14,16 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
 Depends: 
-    R (>= 3.5)
+    R (>= 4.1.0)
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
+    cowplot,
     dplyr,
+    furrr,
+    future,
+    ggplot2,
     magrittr,
     rlang,
     splines,

@@ -71,9 +71,44 @@ rFunc <- function(mod, ndat) {
 }
 
 
+#' Extract result
+#'
+#' @param data input data
+#' @importFrom dplyr filter
+#' @return
+#' Q11,Q10,Q00
+#' @export
+ExtResult2 <- function(data) {
+  Q11 <- data |> filter(lastid == 1 & Ay ==1 & Am ==1)
+  Q10 <- data |> filter(lastid == 1 & Ay ==1 & Am ==0)
+  Q00 <- data |> filter(lastid == 1 & Ay ==0 & Am ==0)
 
+  qq <- data.frame(mQ11 = mean(Q11$Yp2),
+                   mQ10 = mean(Q10$Yp2),
+                   mQ00 = mean(Q00$Yp2))
+  qq
+}
 
+#' Confident interval calculation
+#'
+#' @param data input data
+#' @param ci percentage of confident interval
+#' @param boot doing bootstraping
+#'
+#' @importFrom stats quantile
+#' @return
+#' confident interval
+#' @export
+cal_ci <- function(data,ci = 0.95,boot = T){
 
+  if (boot == F){
+    resu <- NULL
+  } else {
+    qnt <- quantile(data, na.rm = TRUE, probs = c((1-ci)/2,1 - (1-ci)/2))
+    resu <- paste0("(",round(qnt[1],3),",",round(qnt[2],3),")")
+  }
+  resu
+}
 
 
 
