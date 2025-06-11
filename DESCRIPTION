@@ -22,4 +22,5 @@ Imports:
     dplyr,
     magrittr,
     rlang,
-    splines
+    splines,
+    stats

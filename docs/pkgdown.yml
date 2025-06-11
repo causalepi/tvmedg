@@ -2,7 +2,7 @@ pandoc: 3.1.1
 pkgdown: 2.1.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-06-11T07:25Z
+last_built: 2025-06-11T08:02Z
 urls:
   reference: https://causalepi.github.io/tvmedg/reference
   article: https://causalepi.github.io/tvmedg/articles

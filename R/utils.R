@@ -56,7 +56,19 @@ resamp <- function(data,boot = FALSE){
 }
 
 
-
+#' predict function
+#'
+#' @param mod fitted model
+#' @param ndat new input data
+#'
+#' @importFrom stats glm predict rbinom
+#' @return
+#' predicted value
+#' @export
+rFunc <- function(mod, ndat) {
+  pred_prob <- predict(mod, newdata = ndat, type = "response")
+  return(rbinom(1, size = 1, prob = pred_prob))
+}
 
 
 
