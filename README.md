@@ -4,6 +4,8 @@
 # tvmedg
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of tvmedg is to time-varying mediation analysis using
