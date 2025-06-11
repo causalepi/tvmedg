@@ -7,7 +7,7 @@
 #' @param yreg regression model for outcome variable
 #' @param dof degree of freedom
 #'
-#' @importFrom splines bs
+#' @import splines
 #' @importFrom dplyr as_tibble
 #' @importFrom stats glm
 #'
@@ -34,7 +34,7 @@ fitg <- function(data,boot = FALSE,
   }
 
   for (i in 1:length(data$fm)){
-    fitM <- paste0(data$fm[[i]],"+","bs(jj,df=",dof,")")
+    fitM <- paste0(data$fm[[i]],"+","splines::bs(jj,df=",dof,")")
     fitR$M[[i]] <- glm(fitM ,family = mreg[i], data = res_df)
   }
 
@@ -45,12 +45,12 @@ fitg <- function(data,boot = FALSE,
   }
 
   for (i in 1:length(data$fl)){
-    fitL <- paste0(data$fl[[i]],"+","bs(jj,df=",dof,")")
+    fitL <- paste0(data$fl[[i]],"+","splines::bs(jj,df=",dof,")")
     fitR$L[[i]] <- glm(fitL ,family = lreg[i], data = res_df)
   }
 
   #--- Outcome model:
-  fitY <- paste0(data$fy,"+","bs(jj,df=",dof,")")
+  fitY <- paste0(data$fy,"+","splines::bs(jj,df=",dof,")")
 
 
   fitR$Y <-  glm(fitY ,family = yreg, data = res_df)
