@@ -16,6 +16,8 @@ RoxygenNote: 7.3.2
 Depends: 
     R (>= 4.1.0)
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -30,3 +32,4 @@ Imports:
     stats
 URL: https://causalepi.github.io/tvmedg/, https://github.com/causalepi/tvmedg
 BugReports: https://github.com/causalepi/tvmedg/issues
+VignetteBuilder: knitr
