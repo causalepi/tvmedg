@@ -87,52 +87,38 @@
 <h3 id="run-model">Run model<a class="anchor" aria-label="anchor" href="#run-model"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/RevolutionAnalytics/doparallel" class="external-link">doParallel</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Loading required package: foreach</span></span>
-<span><span class="co">#&gt; Loading required package: iterators</span></span>
-<span><span class="co">#&gt; Loading required package: parallel</span></span>
+<code class="sourceCode R"><span><span class="co"># library(doParallel)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># cl &lt;- makeCluster(12)</span></span>
+<span><span class="co"># registerDoParallel(cl)</span></span>
 <span></span>
-<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tvmedg.html">tvmedg</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_data</span>,</span>
-<span>             fix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"sex"</span>,<span class="st">"ow"</span>,<span class="st">"risk"</span><span class="op">)</span>,</span>
-<span>             expo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ap"</span><span class="op">)</span>,</span>
-<span>             med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
-<span>             tvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L1"</span>,<span class="st">"L2"</span>,<span class="st">"L3"</span><span class="op">)</span>,</span>
-<span>             outc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yp"</span><span class="op">)</span>,</span>
-<span>             lag <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>             norev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
-<span>             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
-<span>             LM <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>             boot <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>             seed <span class="op">=</span> <span class="fl">123</span>,</span>
-<span>             mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
-<span>             lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
-<span>             yreg <span class="op">=</span> <span class="st">"binomial"</span>,dof <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             montecarlo <span class="op">=</span> <span class="fl">500</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>             parallel<span class="op">=</span><span class="cn">TRUE</span>,nboot <span class="op">=</span> <span class="fl">5</span>,ci<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(1,1): 0.1 (0.102,0.921) </span></span>
-<span><span class="co">#&gt; Q(1,0): 0.062 (0.002,0.921) </span></span>
-<span><span class="co">#&gt; Q(0,0): 0.008 (0,0.04) </span></span>
-<span><span class="co">#&gt; Indirect: 0.038 (-0.014,0.175) </span></span>
-<span><span class="co">#&gt; Direct: 0.054 (0,0.917) </span></span>
-<span><span class="co">#&gt; Total: 0.092 (0.1,0.917) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.413 (-0.104,0.999) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 53.67839 mins</span></span></code></pre></div>
+<span><span class="co"># op &lt;- tvmedg(data = sim_data,</span></span>
+<span><span class="co">#              fix = c("age","sex","ow","risk"),</span></span>
+<span><span class="co">#              expo = c("Ap"),</span></span>
+<span><span class="co">#              med = c("Mp"),</span></span>
+<span><span class="co">#              tvar = c("L1","L2","L3"),</span></span>
+<span><span class="co">#              outc = c("Yp"),</span></span>
+<span><span class="co">#              lag = 2,</span></span>
+<span><span class="co">#              norev = c("Mp"),</span></span>
+<span><span class="co">#              time = c("mm"),</span></span>
+<span><span class="co">#              LM = F,</span></span>
+<span><span class="co">#              boot = T,</span></span>
+<span><span class="co">#              seed = 123,</span></span>
+<span><span class="co">#              mreg = "binomial",</span></span>
+<span><span class="co">#              lreg = c("binomial","gaussian","gaussian"),</span></span>
+<span><span class="co">#              yreg = "binomial",dof = 3,</span></span>
+<span><span class="co">#              montecarlo = 1000,length = 12,</span></span>
+<span><span class="co">#              parallel=TRUE,nboot = 5,ci=.95)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
+<code class="sourceCode R"><span><span class="co"># plot(op,"all")</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"cumY"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+<code class="sourceCode R"><span><span class="co"># plot(op,"cumY")</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"tvY"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
+<code class="sourceCode R"><span><span class="co"># plot(op,"tvY")</span></span></code></pre></div>
 </div>
 </div>
 </div>
