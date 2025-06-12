@@ -22,7 +22,7 @@ You can install the development version of tvmedg like so:
 devtools::install_github("causalepi/tvmedg")
 ```
 
-## Tutorial
+## Demo
 
 ``` r
 library(tvmedg)
@@ -44,40 +44,57 @@ head(sim_data)
 ### Run model
 
 ``` r
-# library(doParallel)
-# 
-# cl <- makeCluster(12)
-# registerDoParallel(cl)
+library(doParallel)
+#> Loading required package: foreach
+#> Loading required package: iterators
+#> Loading required package: parallel
 
-# op <- tvmedg(data = sim_data,
-#              fix = c("age","sex","ow","risk"),
-#              expo = c("Ap"),
-#              med = c("Mp"),
-#              tvar = c("L1","L2","L3"),
-#              outc = c("Yp"),
-#              lag = 2,
-#              norev = c("Mp"),
-#              time = c("mm"),
-#              LM = F,
-#              boot = T,
-#              seed = 123,
-#              mreg = "binomial",
-#              lreg = c("binomial","gaussian","gaussian"),
-#              yreg = "binomial",dof = 3,
-#              montecarlo = 1000,length = 12,
-#              parallel=TRUE,nboot = 5,ci=.95)
+cl <- makeCluster(12)
+registerDoParallel(cl)
+
+op <- tvmedg(data = sim_data,
+             fix = c("age","sex","ow","risk"),
+             expo = c("Ap"),
+             med = c("Mp"),
+             tvar = c("L1","L2","L3"),
+             outc = c("Yp"),
+             lag = 2,
+             norev = c("Mp"),
+             time = c("mm"),
+             LM = F,
+             boot = T,
+             seed = 123,
+             mreg = "binomial",
+             lreg = c("binomial","gaussian","gaussian"),
+             yreg = "binomial",dof = 3,
+             montecarlo = 100,length = 12,
+             parallel=TRUE,nboot = 2,ci=.95)
+#> Q(1,1): 0.1 (0.141,0.179) 
+#> Q(1,0): 0.05 (0.017,0.283) 
+#> Q(0,0): 0 (0.007,0.283) 
+#> Indirect: 0.05 (-0.104,0.124) 
+#> Direct: 0.05 (0,0.01) 
+#> Total: 0.1 (-0.104,0.134) 
+#> Proportional explain: 0.5 (0.93,0.998) 
+#> Total time elapsed: 3.308425 mins
 ```
 
 ### Plot
 
 ``` r
-# plot(op,"all")
+plot(op,"all")
 ```
 
-``` r
-# plot(op,"cumY")
-```
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 ``` r
-# plot(op,"tvY")
+plot(op,"cumY")
 ```
+
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+
+``` r
+plot(op,"tvY")
+```
+
+<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />

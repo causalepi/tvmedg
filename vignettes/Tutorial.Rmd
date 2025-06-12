@@ -14,8 +14,42 @@ knitr::opts_chunk$set(
 )
 ```
 
+## Background
+
+"tvmedg" means time- varying mediation analysis using g-formula
+
+```{r chunkName, fig.align="center", echo=FALSE}
+knitr::include_graphics("../man/figures/amly.png")
+```
+
+## G-formula flow
+
+### Step 1
+
+Fit parametric models for each of
+
+- Mediation: as a function of lag values of itself, treatment, time-varying covariates (and their lag values), time-fixed covariates, and time since start (need to be flexible, using splines)
+
+- Time-varying covariates: as functions of treatment, mediator ( and it’s lag values), their lag values, time-fixed covariates, and time since start (need to be flexible, using splines)
+
+- Outcome: as a function of treatment, mediator (and it’s lag values), time-varying covariates (and their lag values), time-fixed covariates, and time since start (need to be flexible, using splines)
+
+### Step 2
+
+Resample the values of all variables at baseline (time t = 0). This is to increase precision of follow-up predictions
+
+### Step 3
+
+Using baseline samples of step 2 to predict follow-up, which can be describe as following figure (this is example to estimate $Q (\overline{a},\overline{a}^{*})$
+
+### Step 4
+
+Estimated $Q (\overline{a},\overline{a}^{*})$, $Q (\overline{a},\overline{a})$, $Q (\overline{a}^{*},\overline{a}^{*})$ are used to calculate: total effect, direct effect, indirect effect, and proportional explained
+
+## Application
+
 ```{r setup}
 library(tvmedg)
 ```
 
-Hi there
+

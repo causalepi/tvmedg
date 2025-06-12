@@ -31,7 +31,7 @@ You can install the development version of tvmedg like so:
 devtools::install_github("causalepi/tvmedg")
 ```
 
-## Tutorial
+## Demo
 
 ```{r}
 library(tvmedg)
@@ -46,40 +46,40 @@ head(sim_data)
 ### Run model
 
 ```{r,echo=TRUE,warning=FALSE}
-# library(doParallel)
-# 
-# cl <- makeCluster(12)
-# registerDoParallel(cl)
+library(doParallel)
 
-# op <- tvmedg(data = sim_data,
-#              fix = c("age","sex","ow","risk"),
-#              expo = c("Ap"),
-#              med = c("Mp"),
-#              tvar = c("L1","L2","L3"),
-#              outc = c("Yp"),
-#              lag = 2,
-#              norev = c("Mp"),
-#              time = c("mm"),
-#              LM = F,
-#              boot = T,
-#              seed = 123,
-#              mreg = "binomial",
-#              lreg = c("binomial","gaussian","gaussian"),
-#              yreg = "binomial",dof = 3,
-#              montecarlo = 1000,length = 12,
-#              parallel=TRUE,nboot = 5,ci=.95)
+cl <- makeCluster(12)
+registerDoParallel(cl)
+
+op <- tvmedg(data = sim_data,
+             fix = c("age","sex","ow","risk"),
+             expo = c("Ap"),
+             med = c("Mp"),
+             tvar = c("L1","L2","L3"),
+             outc = c("Yp"),
+             lag = 2,
+             norev = c("Mp"),
+             time = c("mm"),
+             LM = F,
+             boot = T,
+             seed = 123,
+             mreg = "binomial",
+             lreg = c("binomial","gaussian","gaussian"),
+             yreg = "binomial",dof = 3,
+             montecarlo = 100,length = 12,
+             parallel=TRUE,nboot = 2,ci=.95)
 ```
 
 ### Plot
 
 ```{r,echo=TRUE}
-# plot(op,"all")
+plot(op,"all")
 ```
 
 ```{r,echo=TRUE}
-# plot(op,"cumY")
+plot(op,"cumY")
 ```
 
 ```{r,echo=TRUE}
-# plot(op,"tvY")
+plot(op,"tvY")
 ```
