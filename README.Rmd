@@ -17,6 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/causalepi/tvmedg/graph/badge.svg)](https://app.codecov.io/gh/causalepi/tvmedg)
 <!-- badges: end -->
 
 The goal of tvmedg is to time-varying mediation analysis using g-computation
@@ -47,7 +48,7 @@ head(sim_data)
 ```{r,echo=TRUE,warning=FALSE}
 library(doParallel)
 
-cl <- makeCluster(8)
+cl <- makeCluster(12)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
@@ -65,7 +66,7 @@ op <- tvmedg(data = sim_data,
              mreg = "binomial",
              lreg = c("binomial","gaussian","gaussian"),
              yreg = "binomial",dof = 3,
-             montecarlo = 150,length = 12,
+             montecarlo = 500,length = 12,
              parallel=TRUE,nboot = 5,ci=.95)
 ```
 

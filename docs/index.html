@@ -37,6 +37,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/causalepi/tvmedg/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -62,7 +63,7 @@
 <h2 id="tutorial">Tutorial<a class="anchor" aria-label="anchor" href="#tutorial"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tvmedg</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://causalepi.github.io/tvmedg/">tvmedg</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="simulation-data">Simulation data<a class="anchor" aria-label="anchor" href="#simulation-data"></a>
 </h3>
@@ -85,7 +86,7 @@
 <span><span class="co">#&gt; Loading required package: iterators</span></span>
 <span><span class="co">#&gt; Loading required package: parallel</span></span>
 <span></span>
-<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tvmedg.html">tvmedg</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_data</span>,</span>
@@ -103,16 +104,16 @@
 <span>             mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>             lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
 <span>             yreg <span class="op">=</span> <span class="st">"binomial"</span>,dof <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             montecarlo <span class="op">=</span> <span class="fl">150</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>             montecarlo <span class="op">=</span> <span class="fl">500</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>             parallel<span class="op">=</span><span class="cn">TRUE</span>,nboot <span class="op">=</span> <span class="fl">5</span>,ci<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(1,1): 0.08 (0.119,0.252) </span></span>
-<span><span class="co">#&gt; Q(1,0): 0.067 (0,0.248) </span></span>
-<span><span class="co">#&gt; Q(0,0): 0.007 (0,0) </span></span>
-<span><span class="co">#&gt; Indirect: 0.013 (0,0.233) </span></span>
-<span><span class="co">#&gt; Direct: 0.06 (0,0.248) </span></span>
-<span><span class="co">#&gt; Total: 0.073 (0.119,0.252) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.182 (0,1) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 10.00735 mins</span></span></code></pre></div>
+<span><span class="co">#&gt; Q(1,1): 0.1 (0.102,0.921) </span></span>
+<span><span class="co">#&gt; Q(1,0): 0.062 (0.002,0.921) </span></span>
+<span><span class="co">#&gt; Q(0,0): 0.008 (0,0.04) </span></span>
+<span><span class="co">#&gt; Indirect: 0.038 (-0.014,0.175) </span></span>
+<span><span class="co">#&gt; Direct: 0.054 (0,0.917) </span></span>
+<span><span class="co">#&gt; Total: 0.092 (0.1,0.917) </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.413 (-0.104,0.999) </span></span>
+<span><span class="co">#&gt; Total time elapsed: 53.67839 mins</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
@@ -129,7 +130,15 @@
 </div>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/causalepi/tvmedg/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/causalepi/tvmedg/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
@@ -158,6 +167,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://app.codecov.io/gh/causalepi/tvmedg" class="external-link"><img src="https://codecov.io/gh/causalepi/tvmedg/graph/badge.svg" alt="Codecov test coverage"></a></li>
 </ul>
 </div>
 

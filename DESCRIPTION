@@ -28,5 +28,5 @@ Imports:
     rlang,
     splines,
     stats
-URL: https://github.com/causalepi/tvmedg
+URL: https://causalepi.github.io/tvmedg/, https://github.com/causalepi/tvmedg
 BugReports: https://github.com/causalepi/tvmedg/issues

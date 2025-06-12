@@ -6,6 +6,8 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml)
+[![Codecov test
+coverage](https://codecov.io/gh/causalepi/tvmedg/graph/badge.svg)](https://app.codecov.io/gh/causalepi/tvmedg)
 <!-- badges: end -->
 
 The goal of tvmedg is to time-varying mediation analysis using
@@ -47,7 +49,7 @@ library(doParallel)
 #> Loading required package: iterators
 #> Loading required package: parallel
 
-cl <- makeCluster(8)
+cl <- makeCluster(12)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
@@ -65,16 +67,16 @@ op <- tvmedg(data = sim_data,
              mreg = "binomial",
              lreg = c("binomial","gaussian","gaussian"),
              yreg = "binomial",dof = 3,
-             montecarlo = 150,length = 12,
+             montecarlo = 500,length = 12,
              parallel=TRUE,nboot = 5,ci=.95)
-#> Q(1,1): 0.08 (0.119,0.252) 
-#> Q(1,0): 0.067 (0,0.248) 
-#> Q(0,0): 0.007 (0,0) 
-#> Indirect: 0.013 (0,0.233) 
-#> Direct: 0.06 (0,0.248) 
-#> Total: 0.073 (0.119,0.252) 
-#> Proportional explain: 0.182 (0,1) 
-#> Total time elapsed: 10.00735 mins
+#> Q(1,1): 0.1 (0.102,0.921) 
+#> Q(1,0): 0.062 (0.002,0.921) 
+#> Q(0,0): 0.008 (0,0.04) 
+#> Indirect: 0.038 (-0.014,0.175) 
+#> Direct: 0.054 (0,0.917) 
+#> Total: 0.092 (0.1,0.917) 
+#> Proportional explain: 0.413 (-0.104,0.999) 
+#> Total time elapsed: 53.67839 mins
 ```
 
 ### Plot
