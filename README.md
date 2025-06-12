@@ -44,57 +44,40 @@ head(sim_data)
 ### Run model
 
 ``` r
-library(doParallel)
-#> Loading required package: foreach
-#> Loading required package: iterators
-#> Loading required package: parallel
+# library(doParallel)
+# 
+# cl <- makeCluster(12)
+# registerDoParallel(cl)
 
-cl <- makeCluster(12)
-registerDoParallel(cl)
-
-op <- tvmedg(data = sim_data,
-             fix = c("age","sex","ow","risk"),
-             expo = c("Ap"),
-             med = c("Mp"),
-             tvar = c("L1","L2","L3"),
-             outc = c("Yp"),
-             lag = 2,
-             norev = c("Mp"),
-             time = c("mm"),
-             LM = F,
-             boot = T,
-             seed = 123,
-             mreg = "binomial",
-             lreg = c("binomial","gaussian","gaussian"),
-             yreg = "binomial",dof = 3,
-             montecarlo = 500,length = 12,
-             parallel=TRUE,nboot = 5,ci=.95)
-#> Q(1,1): 0.1 (0.102,0.921) 
-#> Q(1,0): 0.062 (0.002,0.921) 
-#> Q(0,0): 0.008 (0,0.04) 
-#> Indirect: 0.038 (-0.014,0.175) 
-#> Direct: 0.054 (0,0.917) 
-#> Total: 0.092 (0.1,0.917) 
-#> Proportional explain: 0.413 (-0.104,0.999) 
-#> Total time elapsed: 53.67839 mins
+# op <- tvmedg(data = sim_data,
+#              fix = c("age","sex","ow","risk"),
+#              expo = c("Ap"),
+#              med = c("Mp"),
+#              tvar = c("L1","L2","L3"),
+#              outc = c("Yp"),
+#              lag = 2,
+#              norev = c("Mp"),
+#              time = c("mm"),
+#              LM = F,
+#              boot = T,
+#              seed = 123,
+#              mreg = "binomial",
+#              lreg = c("binomial","gaussian","gaussian"),
+#              yreg = "binomial",dof = 3,
+#              montecarlo = 1000,length = 12,
+#              parallel=TRUE,nboot = 5,ci=.95)
 ```
 
 ### Plot
 
 ``` r
-plot(op,"all")
+# plot(op,"all")
 ```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 ``` r
-plot(op,"cumY")
+# plot(op,"cumY")
 ```
-
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
 
 ``` r
-plot(op,"tvY")
+# plot(op,"tvY")
 ```
-
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
