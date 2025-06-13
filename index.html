@@ -92,7 +92,7 @@
 <span><span class="co">#&gt; Loading required package: iterators</span></span>
 <span><span class="co">#&gt; Loading required package: parallel</span></span>
 <span></span>
-<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fl">12</span><span class="op">)</span></span>
+<span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tvmedg.html">tvmedg</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_data</span>,</span>
@@ -110,16 +110,16 @@
 <span>             mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>             lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
 <span>             yreg <span class="op">=</span> <span class="st">"binomial"</span>,dof <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             montecarlo <span class="op">=</span> <span class="fl">100</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>             parallel<span class="op">=</span><span class="cn">TRUE</span>,nboot <span class="op">=</span> <span class="fl">2</span>,ci<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(1,1): 0.1 (0.141,0.179) </span></span>
-<span><span class="co">#&gt; Q(1,0): 0.05 (0.017,0.283) </span></span>
-<span><span class="co">#&gt; Q(0,0): 0 (0.007,0.283) </span></span>
-<span><span class="co">#&gt; Indirect: 0.05 (-0.104,0.124) </span></span>
-<span><span class="co">#&gt; Direct: 0.05 (0,0.01) </span></span>
-<span><span class="co">#&gt; Total: 0.1 (-0.104,0.134) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.5 (0.93,0.998) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 3.308425 mins</span></span></code></pre></div>
+<span>             montecarlo <span class="op">=</span> <span class="fl">1000</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>             parallel<span class="op">=</span><span class="cn">TRUE</span>,nboot <span class="op">=</span> <span class="fl">5</span>,ci<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Q(1,1): 0.098 (0.085,0.32) </span></span>
+<span><span class="co">#&gt; Q(1,0): 0.067 (0.005,0.18) </span></span>
+<span><span class="co">#&gt; Q(0,0): 0.004 (0,0.104) </span></span>
+<span><span class="co">#&gt; Indirect: 0.031 (-0.011,0.277) </span></span>
+<span><span class="co">#&gt; Direct: 0.063 (-0.001,0.169) </span></span>
+<span><span class="co">#&gt; Total: 0.094 (-0.004,0.319) </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.33 (0.015,0.992) </span></span>
+<span><span class="co">#&gt; Total time elapsed: 1.362901 hours</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
@@ -163,9 +163,9 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
+<li>Long Khuong <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0002-1232-6230" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Nguyen Pham Nguyen The <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-0356-2776" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li>Thinh Ong <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6772-9291" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
-<li>Long Khuong <br><small class="roles"> Author, copyright holder </small> <a href="https://orcid.org/0000-0002-1232-6230" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -182,7 +182,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Nguyen Pham Nguyen The, Thinh Ong, Long Khuong.</p>
+  <p>Developed by Long Khuong, Nguyen Pham Nguyen The, Thinh Ong.</p>
 </div>
 
 <div class="pkgdown-footer-right">
