@@ -49,7 +49,7 @@ library(doParallel)
 #> Loading required package: iterators
 #> Loading required package: parallel
 
-cl <- makeCluster(12)
+cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
@@ -67,16 +67,16 @@ op <- tvmedg(data = sim_data,
              mreg = "binomial",
              lreg = c("binomial","gaussian","gaussian"),
              yreg = "binomial",dof = 3,
-             montecarlo = 100,length = 12,
-             parallel=TRUE,nboot = 2,ci=.95)
-#> Q(1,1): 0.1 (0.141,0.179) 
-#> Q(1,0): 0.05 (0.017,0.283) 
-#> Q(0,0): 0 (0.007,0.283) 
-#> Indirect: 0.05 (-0.104,0.124) 
-#> Direct: 0.05 (0,0.01) 
-#> Total: 0.1 (-0.104,0.134) 
-#> Proportional explain: 0.5 (0.93,0.998) 
-#> Total time elapsed: 3.308425 mins
+             montecarlo = 1000,length = 12,
+             parallel=TRUE,nboot = 5,ci=.95)
+#> Q(1,1): 0.098 (0.085,0.32) 
+#> Q(1,0): 0.067 (0.005,0.18) 
+#> Q(0,0): 0.004 (0,0.104) 
+#> Indirect: 0.031 (-0.011,0.277) 
+#> Direct: 0.063 (-0.001,0.169) 
+#> Total: 0.094 (-0.004,0.319) 
+#> Proportional explain: 0.33 (0.015,0.992) 
+#> Total time elapsed: 1.362901 hours
 ```
 
 ### Plot

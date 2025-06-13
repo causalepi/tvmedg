@@ -48,7 +48,7 @@ head(sim_data)
 ```{r,echo=TRUE,warning=FALSE}
 library(doParallel)
 
-cl <- makeCluster(12)
+cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
@@ -66,8 +66,8 @@ op <- tvmedg(data = sim_data,
              mreg = "binomial",
              lreg = c("binomial","gaussian","gaussian"),
              yreg = "binomial",dof = 3,
-             montecarlo = 100,length = 12,
-             parallel=TRUE,nboot = 2,ci=.95)
+             montecarlo = 1000,length = 12,
+             parallel=TRUE,nboot = 5,ci=.95)
 ```
 
 ### Plot
