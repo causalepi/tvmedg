@@ -3,9 +3,10 @@ Type: Package
 Title: Time-varying mediation analysis using g-computation 
 Version: 0.1.0
 Authors@R: c(
-    person("Long", "Khuong", email = "khuongquynhlong@gmail.com", role = c("aut","cph"), comment = c(ORCID = "0000-0002-1232-6230")),
+    person("Quynh Long", "Khuong", email = "long.khuong@pennmedicine.upenn.edu", role = c("aut","cph"), comment = c(ORCID = "0000-0002-1232-6230")),
     person("Nguyen", "Pham Nguyen The", email = "nguyenpnt@oucru.org", role = c("aut","cre"),comment = c(ORCID = "0000-0002-0356-2776")),
-    person("Thinh", "Ong", email = "thinhop@oucru.org", role = "aut", comment = c(ORCID = "0000-0001-6772-9291"))
+    person("Thinh", "Ong", email = "thinhop@oucru.org", role = "aut", comment = c(ORCID = "0000-0001-6772-9291")),
+    person("Kelly D.", "Getz", email = "getzk@chop.edu", role = "ths", comment = c(ORCID = "0000-0003-2020-5153"))
   )
 Maintainer: Nguyen Pham Nguyen The <nguyenpnt@oucru.org>
 Description: Time-varying mediation analysis using g-computation.
