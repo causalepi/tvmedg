@@ -76,7 +76,7 @@ op <- tvmedg(data = sim_data,
 #> Direct: 0.063 (-0.001,0.169) 
 #> Total: 0.094 (-0.004,0.319) 
 #> Proportional explain: 0.33 (0.015,0.992) 
-#> Total time elapsed: 1.362901 hours
+#> Total time elapsed: 1.063604 hours
 ```
 
 ### Plot
