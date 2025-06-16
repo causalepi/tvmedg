@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tvmedg
+# tvmedg <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
@@ -76,7 +76,7 @@ op <- tvmedg(data = sim_data,
 #> Direct: 0.063 (-0.001,0.169) 
 #> Total: 0.094 (-0.004,0.319) 
 #> Proportional explain: 0.33 (0.015,0.992) 
-#> Total time elapsed: 1.063604 hours
+#> Total time elapsed: 1.112746 hours
 ```
 
 ### Plot
