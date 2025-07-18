@@ -41,7 +41,7 @@ mytheme <- function(...) {
 #' @return
 #' plot
 #' @export
-plot.tvmedg <- function(x,what = c("all","cumY","tvY"),...){
+plot.tvmedg <- function(x,what = c("cumY","tvY"),...){
 
   tv_cumsum <- x$ori_df |>
     group_by(j) |>
@@ -69,22 +69,13 @@ plot.tvmedg <- function(x,what = c("all","cumY","tvY"),...){
   cumy_dfplot <- dat1M |>
     left_join(tv_cumsum, by = join_by(mm == j))
 
-  y_limt <- max(cumy_dfplot$Ysum,cumy_dfplot$y_prob_cum,na.rm = T)
-
   f_cumY <- cumy_dfplot |>
     ggplot() +
     geom_line(aes(x = mm, y = Ysum, color = group), linewidth = 1) +
     geom_line(aes(x = mm, y = y_prob_cum), color = "gray20",
               linewidth = 1, linetype = 2) +
     scale_color_brewer(palette = "Set1", direction = -1) +
-    scale_y_continuous(limits = c(0, round(y_limt+0.4,1))) +
-    scale_x_continuous(breaks = seq(0, max(dat1M$mm), by = 12)) +
-    mytheme() +
-    labs(x = "Month",
-         y = "%",
-         title = "Cumulative Y (%)",
-         caption = "The dashed line represents the observed %",
-         color = NULL)
+    labs(title = "Cumulative Y (%)")
 
   ## tvY
   tvy_dfplot <- dat1M |>
@@ -98,18 +89,9 @@ plot.tvmedg <- function(x,what = c("all","cumY","tvY"),...){
     geom_line(aes(x = mm, y = y_prop), color = "gray20",
               linewidth = 1, linetype = 2) +
     scale_color_brewer(palette = "Set1", direction = -1) +
-    scale_y_continuous(limits = c(0, round(y_limt2+0.02,1))) +
-    scale_x_continuous(breaks = seq(0, max(dat1M$mm), by = 12)) +
-    mytheme() +
-    labs(x = "Month",
-         y = "%",
-         title = "Y by month (%)",
-         caption = "The dashed line represents the observed %",
-         color = NULL)
+    labs(title = "Time-varying Y")
 
-  if (what == c("all")){
-    out_plot <- plot_grid(f_cumY,f_tvY,nrow = 1)
-  } else if (what == "cumY") {
+  if (what == "cumY") {
     out_plot <- f_cumY
   } else {
     out_plot <- f_tvY
@@ -118,5 +100,6 @@ plot.tvmedg <- function(x,what = c("all","cumY","tvY"),...){
   out_plot
 
 }
+
 
 

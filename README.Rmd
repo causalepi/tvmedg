@@ -35,6 +35,7 @@ devtools::install_github("causalepi/tvmedg")
 
 ```{r}
 library(tvmedg)
+library(ggplot2)
 ```
 
 ### Simulation data
@@ -52,34 +53,54 @@ cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
-             fix = c("age","sex","ow","risk"),
-             expo = c("Ap"),
-             med = c("Mp"),
-             tvar = c("L1","L2","L3"),
-             outc = c("Yp"),
-             lag = 2,
-             norev = c("Mp"),
-             time = c("mm"),
-             LM = F,
-             boot = T,
-             seed = 123,
-             mreg = "binomial",
-             lreg = c("binomial","gaussian","gaussian"),
-             yreg = "binomial",dof = 3,
-             montecarlo = 1000,length = 12,
-             parallel=TRUE,nboot = 5,ci=.95)
+       basec = c("age","sex","ow","risk"),
+       expo = c("Ap"),
+       med = c("Mp"),
+       tvar = c("L1","L2","L3"),
+       outc = c("Yp"),
+       time = c("mm"),
+       lag = 2,
+       norev = c("Mp"),
+       cont_exp = F,
+       cont_exp_std = F,
+       tvar_to_med = F,
+       mreg = "binomial",
+       lreg = c("binomial","gaussian","gaussian"),
+       yreg = "binomial",
+       sp_list = c("mm"),
+       sp_type = c("bs"),
+       sp_df= c(3),
+       followup = 12,
+       seed = 123,
+       montecarlo = 1000,
+       boot = T, 
+       nboot = 5,
+       ci = .95,
+       parallel=TRUE)
+
+stopCluster(cl)
 ```
 
 ### Plot
 
 ```{r,echo=TRUE}
-plot(op,"all")
+plot(op,"cumY")+
+  scale_y_continuous(limits = c(0, 0.5)) +
+  scale_x_continuous(breaks = seq(0, 12, by = 12))+
+  labs(x = "Month",
+       y = "%",
+       caption = "The dashed line represents the observed %",
+       color = NULL)+
+  mytheme()
 ```
 
 ```{r,echo=TRUE}
-plot(op,"cumY")
-```
-
-```{r,echo=TRUE}
-plot(op,"tvY")
+plot(op,"tvY")+
+  scale_y_continuous(limits = c(0, 0.5)) +
+  scale_x_continuous(breaks = seq(0, 12, by = 12)) +
+  labs(x = "Month",
+       y = "%",
+       caption = "The dashed line represents the observed %",
+       color = NULL)+
+  mytheme()
 ```

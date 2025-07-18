@@ -4,7 +4,7 @@
 \alias{plot.tvmedg}
 \title{Plot function}
 \usage{
-\method{plot}{tvmedg}(x, what = c("all", "cumY", "tvY"), ...)
+\method{plot}{tvmedg}(x, what = c("cumY", "tvY"), ...)
 }
 \arguments{
 \item{x}{data}

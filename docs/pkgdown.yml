@@ -3,7 +3,7 @@ pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   Tutorial: Tutorial.html
-last_built: 2025-07-18T05:41Z
+last_built: 2025-07-18T07:43Z
 urls:
   reference: https://causalepi.github.io/tvmedg/reference
   article: https://causalepi.github.io/tvmedg/articles

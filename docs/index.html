@@ -77,7 +77,8 @@
 <h2 id="demo">Demo<a class="anchor" aria-label="anchor" href="#demo"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://causalepi.github.io/tvmedg/">tvmedg</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://causalepi.github.io/tvmedg/">tvmedg</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="simulation-data">Simulation data<a class="anchor" aria-label="anchor" href="#simulation-data"></a>
 </h3>
@@ -104,43 +105,64 @@
 <span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tvmedg.html">tvmedg</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_data</span>,</span>
-<span>             fix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"sex"</span>,<span class="st">"ow"</span>,<span class="st">"risk"</span><span class="op">)</span>,</span>
-<span>             expo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ap"</span><span class="op">)</span>,</span>
-<span>             med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
-<span>             tvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L1"</span>,<span class="st">"L2"</span>,<span class="st">"L3"</span><span class="op">)</span>,</span>
-<span>             outc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yp"</span><span class="op">)</span>,</span>
-<span>             lag <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>             norev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
-<span>             time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
-<span>             LM <span class="op">=</span> <span class="cn">F</span>,</span>
-<span>             boot <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>             seed <span class="op">=</span> <span class="fl">123</span>,</span>
-<span>             mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
-<span>             lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
-<span>             yreg <span class="op">=</span> <span class="st">"binomial"</span>,dof <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>             montecarlo <span class="op">=</span> <span class="fl">1000</span>,length <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>             parallel<span class="op">=</span><span class="cn">TRUE</span>,nboot <span class="op">=</span> <span class="fl">5</span>,ci<span class="op">=</span><span class="fl">.95</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(1,1): 0.098 (0.085,0.32) </span></span>
-<span><span class="co">#&gt; Q(1,0): 0.067 (0.005,0.18) </span></span>
-<span><span class="co">#&gt; Q(0,0): 0.004 (0,0.104) </span></span>
-<span><span class="co">#&gt; Indirect: 0.031 (-0.011,0.277) </span></span>
-<span><span class="co">#&gt; Direct: 0.063 (-0.001,0.169) </span></span>
-<span><span class="co">#&gt; Total: 0.094 (-0.004,0.319) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.33 (0.015,0.992) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 1.112746 hours</span></span></code></pre></div>
+<span>       basec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"sex"</span>,<span class="st">"ow"</span>,<span class="st">"risk"</span><span class="op">)</span>,</span>
+<span>       expo <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ap"</span><span class="op">)</span>,</span>
+<span>       med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
+<span>       tvar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"L1"</span>,<span class="st">"L2"</span>,<span class="st">"L3"</span><span class="op">)</span>,</span>
+<span>       outc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yp"</span><span class="op">)</span>,</span>
+<span>       time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
+<span>       lag <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>       norev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
+<span>       cont_exp <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>       cont_exp_std <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>       tvar_to_med <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>       mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
+<span>       lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
+<span>       yreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
+<span>       sp_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
+<span>       sp_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bs"</span><span class="op">)</span>,</span>
+<span>       sp_df<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>       followup <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>       seed <span class="op">=</span> <span class="fl">123</span>,</span>
+<span>       montecarlo <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>       boot <span class="op">=</span> <span class="cn">T</span>, </span>
+<span>       nboot <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>       ci <span class="op">=</span> <span class="fl">.95</span>,</span>
+<span>       parallel<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Q(a,a): 0.095 (0.083,0.32) </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.06 (0.005,0.183) </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0.004 (0,0.109) </span></span>
+<span><span class="co">#&gt; Indirect: 0.035 (-0.013,0.278) </span></span>
+<span><span class="co">#&gt; Direct: 0.056 (-0.007,0.172) </span></span>
+<span><span class="co">#&gt; Total: 0.091 (-0.012,0.32) </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.385 (0.023,0.987) </span></span>
+<span><span class="co">#&gt; Total time elapsed: 17.54758 mins</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="plot">Plot<a class="anchor" aria-label="anchor" href="#plot"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"all"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"cumY"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span>, by <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Month"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"%"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"The dashed line represents the observed %"</span>,</span>
+<span>       color <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/mytheme.html">mytheme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-5-1.png" width="100%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"cumY"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"tvY"</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">12</span>, by <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Month"</span>,</span>
+<span>       y <span class="op">=</span> <span class="st">"%"</span>,</span>
+<span>       caption <span class="op">=</span> <span class="st">"The dashed line represents the observed %"</span>,</span>
+<span>       color <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu"><a href="reference/mytheme.html">mytheme</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">op</span>,<span class="st">"tvY"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
 </div>
 </div>
 </div>

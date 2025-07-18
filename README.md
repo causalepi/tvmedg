@@ -26,6 +26,7 @@ devtools::install_github("causalepi/tvmedg")
 
 ``` r
 library(tvmedg)
+library(ggplot2)
 ```
 
 ### Simulation data
@@ -53,48 +54,66 @@ cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
-             fix = c("age","sex","ow","risk"),
-             expo = c("Ap"),
-             med = c("Mp"),
-             tvar = c("L1","L2","L3"),
-             outc = c("Yp"),
-             lag = 2,
-             norev = c("Mp"),
-             time = c("mm"),
-             LM = F,
-             boot = T,
-             seed = 123,
-             mreg = "binomial",
-             lreg = c("binomial","gaussian","gaussian"),
-             yreg = "binomial",dof = 3,
-             montecarlo = 1000,length = 12,
-             parallel=TRUE,nboot = 5,ci=.95)
-#> Q(1,1): 0.098 (0.085,0.32) 
-#> Q(1,0): 0.067 (0.005,0.18) 
-#> Q(0,0): 0.004 (0,0.104) 
-#> Indirect: 0.031 (-0.011,0.277) 
-#> Direct: 0.063 (-0.001,0.169) 
-#> Total: 0.094 (-0.004,0.319) 
-#> Proportional explain: 0.33 (0.015,0.992) 
-#> Total time elapsed: 1.112746 hours
+       basec = c("age","sex","ow","risk"),
+       expo = c("Ap"),
+       med = c("Mp"),
+       tvar = c("L1","L2","L3"),
+       outc = c("Yp"),
+       time = c("mm"),
+       lag = 2,
+       norev = c("Mp"),
+       cont_exp = F,
+       cont_exp_std = F,
+       tvar_to_med = F,
+       mreg = "binomial",
+       lreg = c("binomial","gaussian","gaussian"),
+       yreg = "binomial",
+       sp_list = c("mm"),
+       sp_type = c("bs"),
+       sp_df= c(3),
+       followup = 12,
+       seed = 123,
+       montecarlo = 1000,
+       boot = T, 
+       nboot = 5,
+       ci = .95,
+       parallel=TRUE)
+#> Q(a,a): 0.095 (0.083,0.32) 
+#> Q(a,a*): 0.06 (0.005,0.183) 
+#> Q(a*,a*): 0.004 (0,0.109) 
+#> Indirect: 0.035 (-0.013,0.278) 
+#> Direct: 0.056 (-0.007,0.172) 
+#> Total: 0.091 (-0.012,0.32) 
+#> Proportional explain: 0.385 (0.023,0.987) 
+#> Total time elapsed: 17.54758 mins
+
+stopCluster(cl)
 ```
 
 ### Plot
 
 ``` r
-plot(op,"all")
+plot(op,"cumY")+
+  scale_y_continuous(limits = c(0, 0.5)) +
+  scale_x_continuous(breaks = seq(0, 12, by = 12))+
+  labs(x = "Month",
+       y = "%",
+       caption = "The dashed line represents the observed %",
+       color = NULL)+
+  mytheme()
 ```
 
 <img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
 
 ``` r
-plot(op,"cumY")
+plot(op,"tvY")+
+  scale_y_continuous(limits = c(0, 0.5)) +
+  scale_x_continuous(breaks = seq(0, 12, by = 12)) +
+  labs(x = "Month",
+       y = "%",
+       caption = "The dashed line represents the observed %",
+       color = NULL)+
+  mytheme()
 ```
 
 <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
-
-``` r
-plot(op,"tvY")
-```
-
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
