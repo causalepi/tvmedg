@@ -6,32 +6,36 @@
 \usage{
 tvmedg(
   data,
-  fix,
+  basec,
   expo,
   med,
   tvar,
-  lag,
   outc,
   time,
+  lag = 2,
   norev = NULL,
-  LM = FALSE,
-  boot = FALSE,
-  seed = 0,
+  cont_exp = NULL,
+  cont_exp_std = F,
+  tvar_to_med = F,
   mreg = "binomial",
   lreg = c("binomial", "gaussian", "gaussian"),
   yreg = "binomial",
-  dof = 3,
-  montecarlo = 10000,
-  length = 12,
-  parallel = TRUE,
+  sp_list = NULL,
+  sp_type = NULL,
+  sp_df = NULL,
+  followup = 12,
+  seed = 0,
+  montecarlo = 10,
+  boot = FALSE,
   nboot = 1,
-  ci = 0.95
+  ci = 0.95,
+  parallel = TRUE
 )
 }
 \arguments{
 \item{data}{input data}
 
-\item{fix}{time-fixed variable}
+\item{basec}{time-fixed variables}
 
 \item{expo}{exposure variable}
 
@@ -39,19 +43,19 @@ tvmedg(
 
 \item{tvar}{time-varying variable}
 
-\item{lag}{number of lag}
-
 \item{outc}{outcome variable}
 
 \item{time}{time variable}
 
+\item{lag}{number of lag}
+
 \item{norev}{non-reversible variable (among expo,med,tvar)}
 
-\item{LM}{L before M assumption}
+\item{cont_exp}{continuous exposure}
 
-\item{boot}{doing boostrap}
+\item{cont_exp_std}{standardize the continuous exposure}
 
-\item{seed}{set seed}
+\item{tvar_to_med}{time-varying varible to mediator}
 
 \item{mreg}{regression model for mediator}
 
@@ -59,17 +63,25 @@ tvmedg(
 
 \item{yreg}{regression model for outcome variable}
 
-\item{dof}{degree of freedom}
+\item{sp_list}{splines list}
+
+\item{sp_type}{splines type}
+
+\item{sp_df}{spines degree of freedom}
+
+\item{followup}{length of follow up}
+
+\item{seed}{set seed}
 
 \item{montecarlo}{number of repeated samples for accept-reject algorithm}
 
-\item{length}{time to follow up}
-
-\item{parallel}{run parallel}
+\item{boot}{doing boostrap}
 
 \item{nboot}{bootstraping times}
 
 \item{ci}{confident interval}
+
+\item{parallel}{run parallel}
 }
 \value{
 Q11, Q10, Q00

@@ -9,8 +9,7 @@ fitg(
   boot = FALSE,
   mreg = "binomial",
   lreg = c("binomial", "gaussian", "gaussian"),
-  yreg = "binomial",
-  dof = 3
+  yreg = "binomial"
 )
 }
 \arguments{
@@ -23,8 +22,6 @@ fitg(
 \item{lreg}{regression model for time-varying variable}
 
 \item{yreg}{regression model for outcome variable}
-
-\item{dof}{degree of freedom}
 }
 \value{
 fitted model

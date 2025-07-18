@@ -7,27 +7,25 @@
 #' data after resampling
 #'
 #' @export
-baseline_mc <- function(data,montecarlo = 10000){
+baseline_mc <- function(data = fitR2,montecarlo = 10000){
 
-  boot <- data$df
-  # Select baseline visit
-  df0 <- boot[boot$j==1, ]
-
-  df0$idn <- 1:nrow(df0)
-
-  MC <- NULL
-
-  samples <- sample(df0$idn, size = montecarlo, replace = T)
+  boot <- as.data.table(data$df)
+  df0 <- boot[j == 1]
+  df0[, idn := .I]
+  samples <- sample(df0$idn, size = montecarlo, replace = TRUE)
   bb <- table(samples)
 
-  for(zzz in 1:max(bb)) {
-    cc <- df0[df0$idn %in% names(bb[bb %in% c(zzz:max(bb))]), ]
-    cc$bid <- paste0(cc$idn, zzz)
-    MC <- rbind(MC, cc)
-  }
+  MC_list <- lapply(as.integer(names(bb)), function(idn_val) {
+    reps <- bb[as.character(idn_val)]
+    dt  <- df0[idn == idn_val]
+    dt_rep <- dt[rep(1, reps), ]
+    dt_rep[, rep := seq_len(reps)]
+    dt_rep
+  })
 
-  MC$idsim <- 1:montecarlo
+  MC <- rbindlist(MC_list, idcol = "idsim")
+  MC[, idsim := seq_len(.N)]
 
-  data$res_df <- MC %>% as_tibble()
+  data$res_df <- split(MC, by = "idsim", keep.by = TRUE)
   data
 }

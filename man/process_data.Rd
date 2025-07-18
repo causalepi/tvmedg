@@ -5,7 +5,7 @@
 \title{Process data}
 \usage{
 process_data(
-  fix,
+  basec,
   expo,
   med,
   tvar,
@@ -13,12 +13,17 @@ process_data(
   outc,
   time,
   norev = NULL,
-  LM = FALSE,
+  tvar_to_med = FALSE,
+  cont_exp = FALSE,
+  cont_exp_std = F,
+  sp_list = NULL,
+  sp_type = NULL,
+  sp_df = NULL,
   data
 )
 }
 \arguments{
-\item{fix}{time-fixed variable}
+\item{basec}{time-fixed variables}
 
 \item{expo}{exposure variable}
 
@@ -34,7 +39,17 @@ process_data(
 
 \item{norev}{non-reversible variable (among expo,med,tvar)}
 
-\item{LM}{L before M assumption}
+\item{tvar_to_med}{time-varying varible to mediator}
+
+\item{cont_exp}{continuous exposure}
+
+\item{cont_exp_std}{standardize the continuous exposure}
+
+\item{sp_list}{splines list}
+
+\item{sp_type}{splines type}
+
+\item{sp_df}{spines degree of freedom}
 
 \item{data}{input data}
 }

@@ -4,10 +4,12 @@
 \alias{ExtResult2}
 \title{Extract result}
 \usage{
-ExtResult2(data)
+ExtResult2(data, am)
 }
 \arguments{
 \item{data}{input data}
+
+\item{am}{am from model}
 }
 \value{
 Q11,Q10,Q00

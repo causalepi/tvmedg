@@ -24,13 +24,16 @@ Config/testthat/edition: 3
 Imports: 
     cowplot,
     dplyr,
-    furrr,
+    foreach,
     future,
     ggplot2,
     magrittr,
     rlang,
     splines,
-    stats
+    stats,
+    purrr,
+    data.table
 URL: https://causalepi.github.io/tvmedg/, https://github.com/causalepi/tvmedg
 BugReports: https://github.com/causalepi/tvmedg/issues
 VignetteBuilder: knitr
+ByteCompile: true

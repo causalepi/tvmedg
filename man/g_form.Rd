@@ -4,14 +4,14 @@
 \alias{g_form}
 \title{g-formula}
 \usage{
-g_form(data, ii = 2, length = 12, am = 1, ay = 0)
+g_form(data = fitR2$res_df, model = fitR2, followup = 12, am = 1, ay = 0)
 }
 \arguments{
 \item{data}{input data}
 
-\item{ii}{patient id}
+\item{model}{model for g formula}
 
-\item{length}{time to follow up}
+\item{followup}{length of follow up}
 
 \item{am}{am}
 

@@ -64,13 +64,20 @@ dat <- sim_data |>
 
 ## package
 data_pro <- process_data(
-  fix = c("age","sex","ow","risk"),
+  basec = c("age","sex","ow","risk"),
   expo = c("Ap"),
   med = c("Mp"),
   tvar = c("L1","L2","L3"),
   outc = c("Yp"),
   lag = 2,
   time = c("mm"),
+  norev = c("Mp"),
+  tvar_to_med = F,
+  cont_exp = F,
+  cont_exp_std = F,
+  sp_list = c("mm"),
+  sp_type = c("bs"),
+  sp_df= c(3),
   data = sim_data
 )
 

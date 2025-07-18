@@ -4,7 +4,7 @@
 \alias{baseline_mc}
 \title{Resampling basic variables}
 \usage{
-baseline_mc(data, montecarlo = 10000)
+baseline_mc(data = fitR2, montecarlo = 10000)
 }
 \arguments{
 \item{data}{input data}

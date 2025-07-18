@@ -1,56 +1,45 @@
-#' Centering and scaling time variable
-#'
-#' @param time time variable
-#'
-#' @importFrom magrittr %>%
-#' @return
-#' dataframe with scaled time variable, mean and standard deviation of scaled time variable
-#' @export
-cen_and_scale <- function(time){
-
-  j_out <- list()
-
-  jj <- time %>%
-    scale()
-
-  j_out[["jj"]] <- jj %>% as.numeric()
-  j_out[["mean_j"]] <- attributes(jj)$`scaled:center`
-  j_out[["sd_j"]] <- attributes(jj)$`scaled:scale`
-
-  j_out
-}
-
-
 #' Resampling input data
 #'
 #' @param data input data
 #' @param boot doing boostrap
+#'
+#' @importFrom data.table as.data.table rbindlist copy
 #'
 #' @return
 #' an original dataframe if boot = FALSE, resampled dataframe if boot = TRUE
 #' @export
 resamp <- function(data,boot = FALSE){
 
-  df <- data
+  df <- as.data.table(data)
 
-  clusters <- names(table(df$id))
-  index <- sample(1:length(clusters), length(clusters), replace = TRUE)
-  bb <- table(clusters[index])
-  boot_df <- NULL
+  # set.seed(seed)
+  # cat("Running SEED", seed, "\n")
+  # cat("\n")
+  # cat("Resampling Data", "\n")
 
-  if(boot == F) {
-    # not doing bootstrap
-    boot_df <- df
+  clusters <- unique(df$id)
+  samples  <- sample(clusters, length(clusters), replace = TRUE)
+  bb       <- table(samples)
+
+  #— bootstrap
+  if (boot == F) {
+    # no bootstrap
+    boot_df <- copy(df)
   } else {
-    for(zzz in 1:max(bb)) {
-      # Loop over repeated id
-      cc <- df[df$id %in% names(bb[bb %in% c(zzz:max(bb))]), ]
-      cc$bid <- paste0(cc$id, zzz)
-      boot_df <- rbind(boot_df, cc)
-    }
-  }
+    maxbb   <- max(bb)
+    out_list <- vector("list", maxbb)
 
-  boot_df$jj <- cen_and_scale(boot_df$j)$jj
+    for (zzz in seq_len(maxbb)) {
+      # IDs drawn at least zzz times
+      ids_zzz <- names(bb)[bb >= zzz]
+      cc      <- df[id %in% ids_zzz]
+      cc[, bid := paste0(id, zzz)]
+      out_list[[zzz]] <- cc
+    }
+
+    # one single bind of all “layers”
+    boot_df <- rbindlist(out_list, use.names = TRUE)
+  }
 
   boot_df
 }
@@ -73,15 +62,17 @@ rFunc <- function(mod, ndat) {
 
 #' Extract result
 #'
+#' @param am am from model
 #' @param data input data
+#'
 #' @importFrom dplyr filter
 #' @return
 #' Q11,Q10,Q00
 #' @export
-ExtResult2 <- function(data) {
-  Q11 <- data |> filter(lastid == 1 & Ay ==1 & Am ==1)
-  Q10 <- data |> filter(lastid == 1 & Ay ==1 & Am ==0)
-  Q00 <- data |> filter(lastid == 1 & Ay ==0 & Am ==0)
+ExtResult2 <- function(data,am) {
+  Q11 <- data |> filter(lastid == 1 & Ay ==am+1 & Am ==am+1)
+  Q10 <- data |> filter(lastid == 1 & Ay ==am+1 & Am ==am)
+  Q00 <- data |> filter(lastid == 1 & Ay ==am & Am ==am)
 
   qq <- data.frame(mQ11 = mean(Q11$Yp2),
                    mQ10 = mean(Q10$Yp2),
