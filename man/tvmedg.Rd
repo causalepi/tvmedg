@@ -25,7 +25,7 @@ tvmedg(
   sp_df = NULL,
   followup = 12,
   seed = 0,
-  montecarlo = 10,
+  montecarlo = 1000,
   boot = FALSE,
   nboot = 1,
   ci = 0.95,

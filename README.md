@@ -1,32 +1,50 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tvmedg <img src='man/figures/logo.png' align="right" height="139" />
+# tvmedg <img src="man/figures/logo.png" align="right" height="139"/>
 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/causalepi/tvmedg/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/causalepi/tvmedg/graph/badge.svg)](https://app.codecov.io/gh/causalepi/tvmedg)
+
 <!-- badges: end -->
 
-The goal of tvmedg is to time-varying mediation analysis using
-g-computation
+The `tvmedg` package implements *causal mediation analysis* using
+g-computation in longitudinal settings with time-varying exposures,
+mediators, confounders, and outcomes. It extends the g-computation
+framework to decompose total effects into the *randomized interventional
+analogues* of *natural direct* and *indirect effects*, in the presence
+of time-varying confounding affected by prior exposures or mediators.
+This approach builds upon the *‘mediational g-formula’* introduced by
+[VanderWeele and Tchetgen Tchetgen
+(2017)](https://academic.oup.com/jrsssb/article/79/3/917/7040673).
+
+The current version of `tvmedg` supports multiple mediators, both binary
+and continuous exposures, and spline-based functional forms for
+continuous variables. The package also enables parallel computing for
+efficiency in large-scale analyses. Besides the core modeling functions,
+`tvmedg` includes functions for visualizing and diagnosing model
+results.
 
 ## Installation
 
-You can install the development version of tvmedg like so:
+The development version of `tvmedg` can be installed from GitHub:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("causalepi/tvmedg")
 ```
 
-## Demo
+## Quick Start
 
 ``` r
 library(tvmedg)
-library(ggplot2)
+library(doParallel)
+#> Loading required package: foreach
+#> Loading required package: iterators
+#> Loading required package: parallel
 ```
 
 ### Simulation data
@@ -45,11 +63,6 @@ head(sim_data)
 ### Run model
 
 ``` r
-library(doParallel)
-#> Loading required package: foreach
-#> Loading required package: iterators
-#> Loading required package: parallel
-
 cl <- makeCluster(8)
 registerDoParallel(cl)
 
@@ -63,57 +76,25 @@ op <- tvmedg(data = sim_data,
        lag = 2,
        norev = c("Mp"),
        cont_exp = F,
-       cont_exp_std = F,
-       tvar_to_med = F,
        mreg = "binomial",
        lreg = c("binomial","gaussian","gaussian"),
        yreg = "binomial",
        sp_list = c("mm"),
        sp_type = c("bs"),
-       sp_df= c(3),
+       sp_df = c(3),
        followup = 12,
        seed = 123,
        montecarlo = 1000,
-       boot = T, 
-       nboot = 5,
-       ci = .95,
-       parallel=TRUE)
-#> Q(a,a): 0.095 (0.083,0.32) 
-#> Q(a,a*): 0.06 (0.005,0.183) 
-#> Q(a*,a*): 0.004 (0,0.109) 
-#> Indirect: 0.035 (-0.013,0.278) 
-#> Direct: 0.056 (-0.007,0.172) 
-#> Total: 0.091 (-0.012,0.32) 
-#> Proportional explain: 0.385 (0.023,0.987) 
-#> Total time elapsed: 17.54758 mins
+       boot = F,
+       parallel = TRUE)
+#> Q(a,a): 0.2 
+#> Q(a,a*): 0.088 
+#> Q(a*,a*): 0 
+#> Indirect: 0.112 
+#> Direct: 0.088 
+#> Total: 0.2 
+#> Proportional explain: 0.56 
+#> Total time elapsed: 5.13926 mins
 
 stopCluster(cl)
 ```
-
-### Plot
-
-``` r
-plot(op,"cumY")+
-  scale_y_continuous(limits = c(0, 0.5)) +
-  scale_x_continuous(breaks = seq(0, 12, by = 12))+
-  labs(x = "Month",
-       y = "%",
-       caption = "The dashed line represents the observed %",
-       color = NULL)+
-  mytheme()
-```
-
-<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />
-
-``` r
-plot(op,"tvY")+
-  scale_y_continuous(limits = c(0, 0.5)) +
-  scale_x_continuous(breaks = seq(0, 12, by = 12)) +
-  labs(x = "Month",
-       y = "%",
-       caption = "The dashed line represents the observed %",
-       color = NULL)+
-  mytheme()
-```
-
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />

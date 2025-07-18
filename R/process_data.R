@@ -23,12 +23,12 @@
 #' @return
 #' a data frame with lag of exposure, mediator, time-varying variable
 #' @export
-process_data <- function(basec,expo,med,tvar,lag,outc,time,
-                         norev = NULL,tvar_to_med = FALSE,
-                         cont_exp = FALSE,cont_exp_std = F,
+process_data <- function(basec, expo, med, tvar, lag, outc, time,
+                         norev = NULL, tvar_to_med = FALSE,
+                         cont_exp = FALSE, cont_exp_std = F,
                          sp_list = NULL,
                          sp_type = NULL,
-                         sp_df= NULL, data){
+                         sp_df = NULL, data){
 
   ## detect which variables are non-reversible
   if(length(which(expo %in% norev)) != 0){

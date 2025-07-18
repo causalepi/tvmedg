@@ -30,20 +30,19 @@
 #' @importFrom dplyr bind_rows
 #' @importFrom foreach %dopar% foreach
 #'
-#' @import future
 #' @return
 #' Q11, Q10, Q00
 #' @export
-tvmedg <- function(data,basec,expo,med,tvar,outc,time,lag = 2,
-                   norev = NULL, cont_exp = NULL,cont_exp_std = F,
+tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
+                   norev = NULL, cont_exp = NULL, cont_exp_std = F,
                    tvar_to_med = F,
                    mreg = "binomial",
                    lreg = c("binomial","gaussian","gaussian"),
                    yreg = "binomial",
-                   sp_list = NULL,sp_type = NULL,sp_df= NULL,
+                   sp_list = NULL, sp_type = NULL, sp_df= NULL,
                    followup = 12,
-                   seed = 0,montecarlo = 10,boot = FALSE,nboot = 1,ci = .95,
-                   parallel=TRUE){
+                   seed = 0, montecarlo = 1000, boot = FALSE, nboot = 1, ci = .95,
+                   parallel=TRUE) {
 
   set.seed(seed)
 
@@ -136,7 +135,7 @@ tvmedg <- function(data,basec,expo,med,tvar,outc,time,lag = 2,
         sp_type = sp_type,
         sp_df = sp_df,
         data = data)  |>
-        fitg(boot=boot,
+        fitg(boot = boot,
              mreg = mreg,
              lreg = lreg,
              yreg = yreg) |>
@@ -150,7 +149,7 @@ tvmedg <- function(data,basec,expo,med,tvar,outc,time,lag = 2,
         resultDatM_ci <- foreach(
           data = fitR2a$res_df,
           .combine = rbind,
-          .packages = c("splines", "data.table", "dplyr","tvmedg")
+          .packages = c("splines", "data.table", "dplyr", "tvmedg")
         ) %dopar% {
           rbind(
             g_form(data, model = fitR2a, followup = followup, ay = am+1, am = am+1),

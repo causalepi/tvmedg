@@ -7,7 +7,7 @@
 #' data after resampling
 #'
 #' @export
-baseline_mc <- function(data = fitR2,montecarlo = 10000){
+baseline_mc <- function(data = fitR2, montecarlo = 1000){
 
   boot <- as.data.table(data$df)
   df0 <- boot[j == 1]

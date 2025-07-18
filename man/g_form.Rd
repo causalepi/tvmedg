@@ -4,7 +4,7 @@
 \alias{g_form}
 \title{g-formula}
 \usage{
-g_form(data = fitR2$res_df, model = fitR2, followup = 12, am = 1, ay = 0)
+g_form(data = fitR2$res_df, model = fitR2, followup, am = 1, ay = 0)
 }
 \arguments{
 \item{data}{input data}

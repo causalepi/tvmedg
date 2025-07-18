@@ -14,12 +14,12 @@
 #' fitted model
 #'
 #' @export
-fitg <- function(data,boot = FALSE,
+fitg <- function(data, boot = FALSE,
                  mreg = "binomial",
                  lreg = c("binomial","gaussian","gaussian"),
                  yreg = "binomial"){
 
-  res_df <- resamp(data = data$df,boot = boot)
+  res_df <- resamp(data = data$df, boot = boot)
 
   fitR <- list()
 
@@ -34,7 +34,7 @@ fitg <- function(data,boot = FALSE,
 
   for (i in 1:length(data$fm)){
     fitM <- paste0(data$fm[[i]])
-    fitR$M[[i]] <- glm(fitM ,family = mreg[i], data = fitR$df)
+    fitR$M[[i]] <- glm(fitM, family = mreg[i], data = fitR$df)
   }
 
 
@@ -45,12 +45,12 @@ fitg <- function(data,boot = FALSE,
 
   for (i in 1:length(data$fl)){
     fitL <- paste0(data$fl[[i]])
-    fitR$L[[i]] <- glm(fitL ,family = lreg[i], data = fitR$df)
+    fitR$L[[i]] <- glm(fitL, family = lreg[i], data = fitR$df)
   }
 
   #--- Outcome model:
   fitY <- paste0(data$fy)
-  fitR$Y <-  glm(fitY ,family = yreg, data = fitR$df)
+  fitR$Y <-  glm(fitY, family = yreg, data = fitR$df)
 
   fitR$norev_var <- data$norev_var
 

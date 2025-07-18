@@ -11,11 +11,11 @@
 #' @return
 #' dataframe with predict to follow up time
 #' @export
-g_form <- function(data = fitR2$res_df, model = fitR2, followup = 12, am = 1, ay = 0){
+g_form <- function(data = fitR2$res_df, model = fitR2, followup, am = 1, ay = 0){
 
   norev_var <- model$norev_var
 
-  dddd <- data |> as.data.frame()
+  dddd   <- data |> as.data.frame()
   id     <- dddd$idsim[1]
   id_ori <- dddd$id[1]
 
