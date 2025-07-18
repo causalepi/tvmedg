@@ -18,6 +18,7 @@
 #'
 #' @importFrom purrr keep
 #' @importFrom dplyr mutate group_by select starts_with
+#' @importFrom stringr str_starts
 #' @importFrom rlang := sym
 #'
 #' @return

@@ -6,7 +6,7 @@
 #' @return
 #' list of updated aesthetic values
 #' @export
-mytheme <- function(...) {
+tvmedg_theme <- function(...) {
   theme_minimal() +
     theme(
       plot.title = element_text(size = 14,color = "grey10",  face = "bold", hjust = 0.5),

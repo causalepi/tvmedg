@@ -30,7 +30,8 @@ Imports:
     splines,
     stats,
     purrr,
-    data.table
+    data.table,
+    stringr
 URL: https://causalepi.github.io/tvmedg/, https://github.com/causalepi/tvmedg
 BugReports: https://github.com/causalepi/tvmedg/issues
 VignetteBuilder: knitr
