@@ -43,26 +43,30 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">tvmedg</span><span class="op">(</span></span>
 <span>  <span class="va">data</span>,</span>
-<span>  <span class="va">fix</span>,</span>
+<span>  <span class="va">basec</span>,</span>
 <span>  <span class="va">expo</span>,</span>
 <span>  <span class="va">med</span>,</span>
 <span>  <span class="va">tvar</span>,</span>
-<span>  <span class="va">lag</span>,</span>
 <span>  <span class="va">outc</span>,</span>
 <span>  <span class="va">time</span>,</span>
+<span>  lag <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>  norev <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  LM <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  boot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  seed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  cont_exp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  cont_exp_std <span class="op">=</span> <span class="cn">F</span>,</span>
+<span>  tvar_to_med <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>  mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>  lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>, <span class="st">"gaussian"</span>, <span class="st">"gaussian"</span><span class="op">)</span>,</span>
 <span>  yreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
-<span>  dof <span class="op">=</span> <span class="fl">3</span>,</span>
-<span>  montecarlo <span class="op">=</span> <span class="fl">10000</span>,</span>
-<span>  length <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>  parallel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  sp_list <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sp_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sp_df <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  followup <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  seed <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  montecarlo <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  boot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  nboot <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  ci <span class="op">=</span> <span class="fl">0.95</span></span>
+<span>  ci <span class="op">=</span> <span class="fl">0.95</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -74,8 +78,8 @@
 <dd><p>input data</p></dd>
 
 
-<dt id="arg-fix">fix<a class="anchor" aria-label="anchor" href="#arg-fix"></a></dt>
-<dd><p>time-fixed variable</p></dd>
+<dt id="arg-basec">basec<a class="anchor" aria-label="anchor" href="#arg-basec"></a></dt>
+<dd><p>time-fixed variables</p></dd>
 
 
 <dt id="arg-expo">expo<a class="anchor" aria-label="anchor" href="#arg-expo"></a></dt>
@@ -90,10 +94,6 @@
 <dd><p>time-varying variable</p></dd>
 
 
-<dt id="arg-lag">lag<a class="anchor" aria-label="anchor" href="#arg-lag"></a></dt>
-<dd><p>number of lag</p></dd>
-
-
 <dt id="arg-outc">outc<a class="anchor" aria-label="anchor" href="#arg-outc"></a></dt>
 <dd><p>outcome variable</p></dd>
 
@@ -102,20 +102,24 @@
 <dd><p>time variable</p></dd>
 
 
+<dt id="arg-lag">lag<a class="anchor" aria-label="anchor" href="#arg-lag"></a></dt>
+<dd><p>number of lag</p></dd>
+
+
 <dt id="arg-norev">norev<a class="anchor" aria-label="anchor" href="#arg-norev"></a></dt>
 <dd><p>non-reversible variable (among expo,med,tvar)</p></dd>
 
 
-<dt id="arg-lm">LM<a class="anchor" aria-label="anchor" href="#arg-lm"></a></dt>
-<dd><p>L before M assumption</p></dd>
+<dt id="arg-cont-exp">cont_exp<a class="anchor" aria-label="anchor" href="#arg-cont-exp"></a></dt>
+<dd><p>continuous exposure</p></dd>
 
 
-<dt id="arg-boot">boot<a class="anchor" aria-label="anchor" href="#arg-boot"></a></dt>
-<dd><p>doing boostrap</p></dd>
+<dt id="arg-cont-exp-std">cont_exp_std<a class="anchor" aria-label="anchor" href="#arg-cont-exp-std"></a></dt>
+<dd><p>standardize the continuous exposure</p></dd>
 
 
-<dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>set seed</p></dd>
+<dt id="arg-tvar-to-med">tvar_to_med<a class="anchor" aria-label="anchor" href="#arg-tvar-to-med"></a></dt>
+<dd><p>time-varying varible to mediator</p></dd>
 
 
 <dt id="arg-mreg">mreg<a class="anchor" aria-label="anchor" href="#arg-mreg"></a></dt>
@@ -130,20 +134,32 @@
 <dd><p>regression model for outcome variable</p></dd>
 
 
-<dt id="arg-dof">dof<a class="anchor" aria-label="anchor" href="#arg-dof"></a></dt>
-<dd><p>degree of freedom</p></dd>
+<dt id="arg-sp-list">sp_list<a class="anchor" aria-label="anchor" href="#arg-sp-list"></a></dt>
+<dd><p>splines list</p></dd>
+
+
+<dt id="arg-sp-type">sp_type<a class="anchor" aria-label="anchor" href="#arg-sp-type"></a></dt>
+<dd><p>splines type</p></dd>
+
+
+<dt id="arg-sp-df">sp_df<a class="anchor" aria-label="anchor" href="#arg-sp-df"></a></dt>
+<dd><p>spines degree of freedom</p></dd>
+
+
+<dt id="arg-followup">followup<a class="anchor" aria-label="anchor" href="#arg-followup"></a></dt>
+<dd><p>length of follow up</p></dd>
+
+
+<dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
+<dd><p>set seed</p></dd>
 
 
 <dt id="arg-montecarlo">montecarlo<a class="anchor" aria-label="anchor" href="#arg-montecarlo"></a></dt>
 <dd><p>number of repeated samples for accept-reject algorithm</p></dd>
 
 
-<dt id="arg-length">length<a class="anchor" aria-label="anchor" href="#arg-length"></a></dt>
-<dd><p>time to follow up</p></dd>
-
-
-<dt id="arg-parallel">parallel<a class="anchor" aria-label="anchor" href="#arg-parallel"></a></dt>
-<dd><p>run parallel</p></dd>
+<dt id="arg-boot">boot<a class="anchor" aria-label="anchor" href="#arg-boot"></a></dt>
+<dd><p>doing boostrap</p></dd>
 
 
 <dt id="arg-nboot">nboot<a class="anchor" aria-label="anchor" href="#arg-nboot"></a></dt>
@@ -152,6 +168,10 @@
 
 <dt id="arg-ci">ci<a class="anchor" aria-label="anchor" href="#arg-ci"></a></dt>
 <dd><p>confident interval</p></dd>
+
+
+<dt id="arg-parallel">parallel<a class="anchor" aria-label="anchor" href="#arg-parallel"></a></dt>
+<dd><p>run parallel</p></dd>
 
 </dl></div>
     <div class="section level2">
