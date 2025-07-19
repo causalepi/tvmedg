@@ -90,13 +90,13 @@ ExtResult2 <- function(data,am) {
 #' @return
 #' confident interval
 #' @export
-cal_ci <- function(data,ci = 0.95,boot = T){
+cal_ci <- function(data, ci = 0.95, boot = T){
 
   if (boot == F){
     resu <- NULL
   } else {
     qnt <- quantile(data, na.rm = TRUE, probs = c((1-ci)/2,1 - (1-ci)/2))
-    resu <- paste0("(",round(qnt[1],3),",",round(qnt[2],3),")")
+    resu <- paste0("(",round(qnt[1],3), ", ", round(qnt[2],3),")")
   }
   resu
 }

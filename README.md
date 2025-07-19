@@ -12,12 +12,12 @@ coverage](https://codecov.io/gh/causalepi/tvmedg/graph/badge.svg)](https://app.c
 <!-- badges: end -->
 
 The `tvmedg` package implements *causal mediation analysis* using
-g-computation in longitudinal settings with time-varying exposures,
-mediators, confounders, and outcomes. It extends the g-computation
-framework to decompose total effects into the *randomized interventional
-analogues* of *natural direct* and *indirect effects*, in the presence
-of time-varying confounding affected by prior exposures or mediators.
-This approach builds upon the *‘mediational g-formula’* introduced by
+g-computation in longitudinal settings with time-varying exposure,
+mediators, and confounders. It extends the g-computation framework to
+decompose total effects into the *randomized interventional analogues*
+of *natural direct* and *indirect effects*, in the presence of
+time-varying confounding affected by prior exposures or mediators. This
+approach builds upon the *‘mediational g-formula’* introduced by
 [VanderWeele and Tchetgen Tchetgen
 (2017)](https://academic.oup.com/jrsssb/article/79/3/917/7040673).
 
@@ -74,7 +74,6 @@ op <- tvmedg(data = sim_data,
        outc = c("Yp"),
        time = c("mm"),
        lag = 2,
-       norev = c("Mp"),
        cont_exp = F,
        mreg = "binomial",
        lreg = c("binomial","gaussian","gaussian"),
@@ -87,14 +86,6 @@ op <- tvmedg(data = sim_data,
        montecarlo = 1000,
        boot = F,
        parallel = TRUE)
-#> Q(a,a): 0.193 
-#> Q(a,a*): 0.076 
-#> Q(a*,a*): 0 
-#> Indirect: 0.117 
-#> Direct: 0.076 
-#> Total: 0.193 
-#> Proportional explain: 0.606 
-#> Total time elapsed: 3.121895 mins
 
 stopCluster(cl)
 ```

@@ -14,7 +14,7 @@ tvmedg(
   time,
   lag = 2,
   norev = NULL,
-  cont_exp = NULL,
+  cont_exp = F,
   cont_exp_std = F,
   tvar_to_med = F,
   mreg = "binomial",
@@ -29,7 +29,7 @@ tvmedg(
   boot = FALSE,
   nboot = 1,
   ci = 0.95,
-  parallel = TRUE
+  parallel = FALSE
 )
 }
 \arguments{

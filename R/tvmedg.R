@@ -34,15 +34,15 @@
 #' Q11, Q10, Q00
 #' @export
 tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
-                   norev = NULL, cont_exp = NULL, cont_exp_std = F,
+                   norev = NULL, cont_exp = F, cont_exp_std = F,
                    tvar_to_med = F,
                    mreg = "binomial",
                    lreg = c("binomial","gaussian","gaussian"),
                    yreg = "binomial",
-                   sp_list = NULL, sp_type = NULL, sp_df= NULL,
+                   sp_list = NULL, sp_type = NULL, sp_df = NULL,
                    followup = 12,
                    seed = 0, montecarlo = 1000, boot = FALSE, nboot = 1, ci = .95,
-                   parallel=TRUE) {
+                   parallel = FALSE) {
 
   set.seed(seed)
 
@@ -193,9 +193,9 @@ tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
   cat("Q(a,a*):", round(qqq$mQ10, 3),cal_ci(qqq_ci$mQ10,ci,boot = boot),'\n')
   cat("Q(a*,a*):", round(qqq$mQ00, 3),cal_ci(qqq_ci$mQ00,ci,boot = boot),'\n')
 
-  cat("Indirect:", round(qqq$rIE_b, 3),cal_ci(qqq_ci$rIE_b,ci,boot = boot),'\n')
-  cat("Direct:", round(qqq$rDE_b, 3),cal_ci(qqq_ci$rDE_b,ci,boot = boot),'\n')
-  cat("Total:", round(qqq$rTE_b, 3),cal_ci(qqq_ci$rTE_b,ci,boot = boot),'\n')
+  cat("Indirect (rIE):", round(qqq$rIE_b, 3),cal_ci(qqq_ci$rIE_b,ci,boot = boot),'\n')
+  cat("Direct (rDE):", round(qqq$rDE_b, 3),cal_ci(qqq_ci$rDE_b,ci,boot = boot),'\n')
+  cat("Total (rTE):", round(qqq$rTE_b, 3),cal_ci(qqq_ci$rTE_b,ci,boot = boot),'\n')
   cat("Proportional explain:",
       round(qqq$rPE_b, 3),cal_ci(qqq_ci$rPE_b,ci,boot = boot),'\n')
 

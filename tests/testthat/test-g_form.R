@@ -315,7 +315,7 @@ fitR2 <- process_data(
 resultDatM <-  foreach(
   data = fitR2$res_df,
   .combine = rbind,
-  .packages = c("splines", "data.table", "dplyr","tvmedg"),
+  .packages = c("splines", "data.table", "dplyr", "tvmedg"),
   .export = "g_form"
 ) %dopar% {
   rbind(

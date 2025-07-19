@@ -88,7 +88,8 @@ plot.tvmedg <- function(x, what = c("cumY","tvY"),...){
     geom_line(aes(x = mm, y = y_prob_cum), color = "gray20",
               linewidth = 1, linetype = 2) +
     scale_color_brewer(palette = "Set1", direction = -1) +
-    labs(title = "Cumulative Y")
+    labs(title = "Cumulative Y",
+         caption = "The black dashed line represents the observed value")
 
   ## tvY
 
@@ -100,7 +101,8 @@ plot.tvmedg <- function(x, what = c("cumY","tvY"),...){
     geom_line(aes(x = mm, y = y_prop), color = "gray20",
               linewidth = 1, linetype = 2) +
     scale_color_brewer(palette = "Set1", direction = -1) +
-    labs(title = "Time-varying Y")
+    labs(title = "Time-varying Y",
+         caption = "The black dashed line represents the observed value")
 
   if (what == "cumY") {
     out_plot <- f_cumY

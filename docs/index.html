@@ -13,8 +13,8 @@
 <link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Time-varying mediation analysis using g-computation">
 <meta name="description" content="Time-varying mediation analysis using g-computation.">
 <meta property="og:description" content="Time-varying mediation analysis using g-computation.">
@@ -41,7 +41,8 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/Tutorial.html">Tutorial</a></li>
+<li><a class="dropdown-item" href="articles/single_mediator.html">Time-varying Mediation Analysis with Binary Exposure and Single Mediator</a></li>
+    <li><a class="dropdown-item" href="articles/tvmedg_algorithms.html">G-computation Algorithms in tvmedg</a></li>
   </ul>
 </li>
       </ul>
@@ -65,7 +66,7 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The <code>tvmedg</code> package implements <em>causal mediation analysis</em> using g-computation in longitudinal settings with time-varying exposures, mediators, confounders, and outcomes. It extends the g-computation framework to decompose total effects into the <em>randomized interventional analogues</em> of <em>natural direct</em> and <em>indirect effects</em>, in the presence of time-varying confounding affected by prior exposures or mediators. This approach builds upon the <em>‘mediational g-formula’</em> introduced by <a href="https://academic.oup.com/jrsssb/article/79/3/917/7040673" class="external-link">VanderWeele and Tchetgen Tchetgen (2017)</a>.</p>
+<p>The <code>tvmedg</code> package implements <em>causal mediation analysis</em> using g-computation in longitudinal settings with time-varying exposure, mediators, and confounders. It extends the g-computation framework to decompose total effects into the <em>randomized interventional analogues</em> of <em>natural direct</em> and <em>indirect effects</em>, in the presence of time-varying confounding affected by prior exposures or mediators. This approach builds upon the <em>‘mediational g-formula’</em> introduced by <a href="https://academic.oup.com/jrsssb/article/79/3/917/7040673" class="external-link">VanderWeele and Tchetgen Tchetgen (2017)</a>.</p>
 <p>The current version of <code>tvmedg</code> supports multiple mediators, both binary and continuous exposures, and spline-based functional forms for continuous variables. The package also enables parallel computing for efficiency in large-scale analyses. Besides the core modeling functions, <code>tvmedg</code> includes functions for visualizing and diagnosing model results.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -112,7 +113,6 @@
 <span>       outc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yp"</span><span class="op">)</span>,</span>
 <span>       time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
 <span>       lag <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>       norev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
 <span>       cont_exp <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>       mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>       lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
@@ -125,14 +125,6 @@
 <span>       montecarlo <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>       boot <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>       parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.193 </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0.076 </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0 </span></span>
-<span><span class="co">#&gt; Indirect: 0.117 </span></span>
-<span><span class="co">#&gt; Direct: 0.076 </span></span>
-<span><span class="co">#&gt; Total: 0.193 </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.606 </span></span>
-<span><span class="co">#&gt; Total time elapsed: 3.121895 mins</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -189,7 +181,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
