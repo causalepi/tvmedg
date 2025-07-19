@@ -41,7 +41,8 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/Tutorial.html">Tutorial</a></li>
+<li><a class="dropdown-item" href="articles/single_mediator.html">Time-varying Mediation Analysis with Binary Exposure and Single Mediator</a></li>
+    <li><a class="dropdown-item" href="articles/tvmedg_algorithms.html">G-computation Algorithms in tvmedg</a></li>
   </ul>
 </li>
       </ul>
@@ -65,7 +66,7 @@
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The <code>tvmedg</code> package implements <em>causal mediation analysis</em> using g-computation in longitudinal settings with time-varying exposures, mediators, confounders, and outcomes. It extends the g-computation framework to decompose total effects into the <em>randomized interventional analogues</em> of <em>natural direct</em> and <em>indirect effects</em>, in the presence of time-varying confounding affected by prior exposures or mediators. This approach builds upon the <em>‘mediational g-formula’</em> introduced by <a href="https://academic.oup.com/jrsssb/article/79/3/917/7040673" class="external-link">VanderWeele and Tchetgen Tchetgen (2017)</a>.</p>
+<p>The <code>tvmedg</code> package implements <em>causal mediation analysis</em> using g-computation in longitudinal settings with time-varying exposure, mediators, and confounders. It extends the g-computation framework to decompose total effects into the <em>randomized interventional analogues</em> of <em>natural direct</em> and <em>indirect effects</em>, in the presence of time-varying confounding affected by prior exposures or mediators. This approach builds upon the <em>‘mediational g-formula’</em> introduced by <a href="https://academic.oup.com/jrsssb/article/79/3/917/7040673" class="external-link">VanderWeele and Tchetgen Tchetgen (2017)</a>.</p>
 <p>The current version of <code>tvmedg</code> supports multiple mediators, both binary and continuous exposures, and spline-based functional forms for continuous variables. The package also enables parallel computing for efficiency in large-scale analyses. Besides the core modeling functions, <code>tvmedg</code> includes functions for visualizing and diagnosing model results.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -90,12 +91,12 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   id mm Ap Mp L1       L2        L3 Yp      age sex ow risk lastid</span></span>
-<span><span class="co">#&gt; 1  1  1  0  0  0 100.0000  80.00000  0 10.92764   1  1    0      0</span></span>
-<span><span class="co">#&gt; 2  1  2  0  0  0 130.6644  88.06184  0 10.92764   1  1    0      0</span></span>
-<span><span class="co">#&gt; 3  1  3  0  0  0 125.2740  97.63087  0 10.92764   1  1    0      0</span></span>
-<span><span class="co">#&gt; 4  1  4  0  0  0 135.2596 112.20273  0 10.92764   1  1    0      0</span></span>
-<span><span class="co">#&gt; 5  1  5  0  0  0 124.3786 108.05454  0 10.92764   1  1    0      0</span></span>
-<span><span class="co">#&gt; 6  1  6  0  0  0 141.4882 123.36927  0 10.92764   1  1    0      0</span></span></code></pre></div>
+<span><span class="co">#&gt; 1  1  1  0  0  0 100.0000  80.00000  0 16.52949   0  0    0      0</span></span>
+<span><span class="co">#&gt; 2  1  2  0  0  0 125.1296 102.02885  0 16.52949   0  0    0      0</span></span>
+<span><span class="co">#&gt; 3  1  3  0  0  0 116.4990  98.99688  0 16.52949   0  0    0      0</span></span>
+<span><span class="co">#&gt; 4  1  4  0  0  0 131.9247 104.07117  0 16.52949   0  0    0      0</span></span>
+<span><span class="co">#&gt; 5  1  5  0  0  0 109.5959 103.24813  0 16.52949   0  0    0      0</span></span>
+<span><span class="co">#&gt; 6  1  6  0  0  0 124.2403  95.82793  0 16.52949   0  0    0      0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="run-model">Run model<a class="anchor" aria-label="anchor" href="#run-model"></a>
@@ -112,7 +113,6 @@
 <span>       outc <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Yp"</span><span class="op">)</span>,</span>
 <span>       time <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mm"</span><span class="op">)</span>,</span>
 <span>       lag <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>       norev <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Mp"</span><span class="op">)</span>,</span>
 <span>       cont_exp <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>       mreg <span class="op">=</span> <span class="st">"binomial"</span>,</span>
 <span>       lreg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"binomial"</span>,<span class="st">"gaussian"</span>,<span class="st">"gaussian"</span><span class="op">)</span>,</span>
@@ -125,14 +125,14 @@
 <span>       montecarlo <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>       boot <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>       parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.193 </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0.076 </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0 </span></span>
-<span><span class="co">#&gt; Indirect: 0.117 </span></span>
-<span><span class="co">#&gt; Direct: 0.076 </span></span>
-<span><span class="co">#&gt; Total: 0.193 </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.606 </span></span>
-<span><span class="co">#&gt; Total time elapsed: 3.121895 mins</span></span>
+<span><span class="co">#&gt; Q(a,a): 0.213 </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.041 </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0.011 </span></span>
+<span><span class="co">#&gt; Indirect: 0.172 </span></span>
+<span><span class="co">#&gt; Direct: 0.03 </span></span>
+<span><span class="co">#&gt; Total: 0.202 </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.851 </span></span>
+<span><span class="co">#&gt; Total time elapsed: 6.460357 mins</span></span>
 <span></span>
 <span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
