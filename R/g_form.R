@@ -6,7 +6,7 @@
 #' @param model model for g formula
 #' @param followup length of follow up
 #'
-#' @importFrom dplyr contains matches case_when
+#' @importFrom dplyr contains matches case_when select
 #'
 #' @return
 #' dataframe with predict to follow up time
@@ -25,27 +25,25 @@ g_form <- function(data = fitR2$res_df, model = fitR2, followup, am = 1, ay = 0)
   Vp <- dddd |> select(starts_with("v"))
 
   Yp2 <- numeric(followup)
-
   mm <- seq_len(followup)
 
-
-  Yp2[1:lagg-1] <- 0
-
+  Yp2[1:(lagg-1)] <- 0
 
   # mediator
   Mp <- matrix(ncol = length(model$M)) |> data.frame()
   names(Mp) <- paste0("M",1:length(model$M))
-  Mp[1:lagg-1,] <- dddd |> select(names(Mp))
-
+  Mp[1:(lagg-1),] <- dddd |> select(names(Mp))
 
   # time-varying covariates (contribute to mediator models)
   Lmp <- matrix(ncol = length(model$L)) |> data.frame()
   names(Lmp) <- paste0("L",1:length(model$L))
-  Lmp[1:lagg-1,] <- dddd |> select(names(Lmp))
+  Lmp[1:(lagg-1),] <- dddd |> select(names(Lmp))
+
+
   # time-varying covariates (contribute to outcome models)
   Lp <- Lmp
 
-  for (l in lagg:followup) {
+  for (l in 2:followup) {
 
     if (Yp2[l-1]==1) {
       # event occurred at time (l-1) → stop here
@@ -258,5 +256,6 @@ g_form <- function(data = fitR2$res_df, model = fitR2, followup, am = 1, ay = 0)
   gdat2$lastid <- as.numeric(!duplicated(gdat2$id, fromLast = T))
 
   return(gdat2)
+
 }
 

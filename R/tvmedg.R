@@ -82,7 +82,6 @@ tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
 
   am <- fitR2$am
 
-
   if (parallel == TRUE){
 
     resultDatM <- foreach(
@@ -160,11 +159,11 @@ tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
 
       } else {
         outdat11 <- g_form(data=fitR2a$res_df, model = fitR2a,
-                           followup = followup, ay = am+1, am = am+1)
+                            followup = followup, ay = am+1, am = am+1)
         outdat10 <- g_form(data=fitR2a$res_df, model = fitR2a,
-                           followup = followup, ay = am+1, am = am)
+                            followup = followup, ay = am+1, am = am)
         outdat00 <- g_form(data=fitR2a$res_df, model = fitR2a,
-                           followup = followup, ay = am, am = am)
+                            followup = followup, ay = am, am = am)
         resultDatM_ci <- rbind(outdat11, outdat10, outdat00)
       }
 
