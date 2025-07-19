@@ -35,7 +35,6 @@ Since, g-computation is computationally intensive, we will leverage parallel com
 
 ```{r}
 library(tvmedg)
-library(doParallel)
 head(sim_data)
 ```
 
@@ -45,7 +44,7 @@ head(sim_data)
 First example is when the **mediator precedes the time-varying confounders** ($M \rightarrow L$). This corresponds to the following DAG
 
 
-```{r dag_amly, fig.align="center", echo=FALSE, out.width='75%'}
+```{r dag_amly, fig.align="center", echo=FALSE, out.width='75%', fig.cap = "DAG for the context that mediator precedes the time-varying confounders"}
 knitr::include_graphics("../man/figures/amly.png")
 ```
 
@@ -57,6 +56,8 @@ The current version of `tvmedg` supports **lag-based functional forms** for vari
 
 
 ```{r, warning=FALSE, eval=FALSE}
+library(doParallel)
+
 cl <- makeCluster(8)
 registerDoParallel(cl)
 med_MtoL <- tvmedg(data = sim_data,

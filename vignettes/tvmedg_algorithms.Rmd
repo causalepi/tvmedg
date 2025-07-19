@@ -52,7 +52,7 @@ $$
 
 As shown by [VanderWeele and Tchetgen Tchetgen (2017)](https://academic.oup.com/jrsssb/article/79/3/917/7040673), the interventional analogues of natural direct and indirect effects, under the causal DAG (below) where the mediator precedes the time-varying confounder ($M$ preceding $L$), can be identified using the so-called *mediational g-formula*.
 
-```{r dag_amly_a, fig.align="center", echo=FALSE, out.width='80%'}
+```{r dag_amly_a, fig.align="center", echo=FALSE, out.width='80%', fig.cap = "DAG for the context that the mediator precedes the time-varying confounder"}
 knitr::include_graphics("../man/figures/amly.png")
 ```
 
@@ -74,7 +74,7 @@ P\left( m(t) \mid \bar{a}^*(t), \bar{m}(t-1), \bar{l}^\dagger(t-1), v \right)
 
 In the context where time-varying confounder precedes the mediator ($L$ preceding $M$)
 
-```{r dag_almy_a, fig.align="center", echo=FALSE, out.width='80%'}
+```{r dag_almy_a, fig.align="center", echo=FALSE, out.width='80%', fig.cap = "DAG for the context that the time-varying confounder precedes the mediator"}
 knitr::include_graphics("../man/figures/almy.png")
 ```
 
@@ -122,7 +122,7 @@ tvmedg implements g-computation to estimate interventional direct and indirect e
 - **Step 3: Predict follow-up**  
   Using the baseline samples generated in Step 2, Step 3 simulates follow-up trajectories by sequentially predicting time-varying confounders, mediators, and outcomes under specified exposure regimes. This process is illustrated in the following figure (as an example for estimating $Q(a, a^*)$) in the context of binary outcome.
 
-```{r algo_step, fig.align="center", echo=FALSE, out.width='60%'}
+```{r algo_step, fig.align="center", echo=FALSE, out.width='60%', fig.cap = "g-computation in tvmedg"}
 knitr::include_graphics("../man/figures/tvmedg_gcomp.png")
 ```
 
