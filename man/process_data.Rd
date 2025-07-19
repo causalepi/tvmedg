@@ -15,7 +15,7 @@ process_data(
   norev = NULL,
   tvar_to_med = FALSE,
   cont_exp = FALSE,
-  cont_exp_std = F,
+  cont_exp_std = FALSE,
   sp_list = NULL,
   sp_type = NULL,
   sp_df = NULL,

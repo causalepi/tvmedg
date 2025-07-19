@@ -15,9 +15,9 @@
 #'
 #' @export
 fitg <- function(data, boot = FALSE,
-                 mreg = "binomial",
-                 lreg = c("binomial","gaussian","gaussian"),
-                 yreg = "binomial"){
+                 mreg = NULL,
+                 lreg = NULL,
+                 yreg = NULL){
 
   res_df <- resamp(data = data$df, boot = boot)
 

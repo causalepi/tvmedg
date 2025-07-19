@@ -4,13 +4,7 @@
 \alias{fitg}
 \title{Fitting model}
 \usage{
-fitg(
-  data,
-  boot = FALSE,
-  mreg = "binomial",
-  lreg = c("binomial", "gaussian", "gaussian"),
-  yreg = "binomial"
-)
+fitg(data, boot = FALSE, mreg = NULL, lreg = NULL, yreg = NULL)
 }
 \arguments{
 \item{data}{input data}

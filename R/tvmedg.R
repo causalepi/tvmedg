@@ -34,13 +34,13 @@
 #' Q11, Q10, Q00
 #' @export
 tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
-                   norev = NULL, cont_exp = F, cont_exp_std = F,
-                   tvar_to_med = F,
-                   mreg = "binomial",
-                   lreg = c("binomial","gaussian","gaussian"),
-                   yreg = "binomial",
+                   norev = NULL, cont_exp = FALSE, cont_exp_std = FALSE,
+                   tvar_to_med = FALSE,
+                   mreg = NULL,
+                   lreg = NULL,
+                   yreg = NULL,
                    sp_list = NULL, sp_type = NULL, sp_df = NULL,
-                   followup = 12,
+                   followup = NULL,
                    seed = 0, montecarlo = 1000, boot = FALSE, nboot = 1, ci = .95,
                    parallel = FALSE) {
 
