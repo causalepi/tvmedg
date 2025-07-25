@@ -45,8 +45,7 @@ jobs:
           extra-packages: any::rcmdcheck
           needs: check
       - name: Install
-          run: |
-          remotes::install_github("causalepi/tvmedg")
+          run: | remotes::install_github("causalepi/tvmedg")
           shell: Rscript {0}
       - uses: r-lib/actions/check-r-package@v2
         with:
