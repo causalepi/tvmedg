@@ -33,7 +33,7 @@ This example illustrates how to use `tvmedg()` function to conduct time-varying 
 Since, g-computation is computationally intensive, we will leverage parallel computing using the `foreach` and `doParallel` packages to improve efficiency
 
 
-```{r}
+```{r,message=FALSE}
 library(tvmedg)
 head(sim_data)
 ```
@@ -55,11 +55,11 @@ The current version of `tvmedg` supports **lag-based functional forms** for vari
 
 
 
-```{r, warning=FALSE, eval=FALSE}
-library(doParallel)
-
-cl <- makeCluster(8)
-registerDoParallel(cl)
+```{r, warning=FALSE}
+# library(doParallel)
+# 
+# cl <- makeCluster(8)
+# registerDoParallel(cl)
 med_MtoL <- tvmedg(data = sim_data,
                    basec = c("age","sex","ow","risk"),
                    expo = c("Ap"),
@@ -78,10 +78,10 @@ med_MtoL <- tvmedg(data = sim_data,
                    sp_df = c(3),
                    followup = 12,
                    seed = 123,
-                   montecarlo = 1000,
+                   montecarlo = 10,
                    boot = F,
                    parallel = TRUE)
-stopCluster(cl)
+# stopCluster(cl)
 ```
 
 
@@ -94,7 +94,7 @@ stopCluster(cl)
 For illustration purposes, and to reduce computational burden in this example, we run only 5 bootstrap iterations.
 
 
-```{r, warning=FALSE, eval=FALSE}
+```{r, warning=FALSE}
 med_MtoL_ci <- tvmedg(data = sim_data,
                    basec = c("age","sex","ow","risk"),
                    expo = c("Ap"),
@@ -113,12 +113,12 @@ med_MtoL_ci <- tvmedg(data = sim_data,
                    sp_df = c(3),
                    followup = 12,
                    seed = 123,
-                   montecarlo = 1000,
+                   montecarlo = 10,
                    boot = T,
                    nboot = 5,
                    ci = .95,
                    parallel = TRUE)
-stopCluster(cl)
+# stopCluster(cl)
 ```
 
 
@@ -140,7 +140,7 @@ To aid in this evaluation, `tvmedg` provides two diagnostic plots:
 
 **Time-varying plot**
 
-```{r, eval=FALSE}
+```{r}
 plot(med_MtoL, "tvY")
 ```
 
@@ -148,7 +148,7 @@ plot(med_MtoL, "tvY")
 
 **Cumulative plot**
 
-```{r, eval=FALSE}
+```{r}
 plot(med_MtoL, "cumY")
 ```
 

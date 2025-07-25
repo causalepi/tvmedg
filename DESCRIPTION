@@ -31,7 +31,8 @@ Imports:
     stats,
     purrr,
     data.table,
-    stringr
+    stringr,
+    doParallel
 URL: https://causalepi.github.io/tvmedg/, https://github.com/causalepi/tvmedg
 BugReports: https://github.com/causalepi/tvmedg/issues
 VignetteBuilder: knitr
