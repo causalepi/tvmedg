@@ -102,8 +102,8 @@
 <h3 id="run-model">Run model<a class="anchor" aria-label="anchor" href="#run-model"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu">makeCluster</span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
-<span><span class="fu">registerDoParallel</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">cl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/doParallel/man/registerDoParallel.html" class="external-link">registerDoParallel</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/tvmedg.html">tvmedg</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">sim_data</span>,</span>
 <span>       basec <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"age"</span>,<span class="st">"sex"</span>,<span class="st">"ow"</span>,<span class="st">"risk"</span><span class="op">)</span>,</span>
@@ -134,7 +134,7 @@
 <span><span class="co">#&gt; Proportional explain: 0.851 </span></span>
 <span><span class="co">#&gt; Total time elapsed: 6.460357 mins</span></span>
 <span></span>
-<span><span class="fu">stopCluster</span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 </div>
