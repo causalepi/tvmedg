@@ -60,6 +60,12 @@ library(doParallel)
 
 cl <- makeCluster(2)
 registerDoParallel(cl)
+
+clusterEvalQ(cl, {
+  library(tvmedg)
+})
+
+
 med_MtoL <- tvmedg(data = sim_data,
                    basec = c("age","sex","ow","risk"),
                    expo = c("Ap"),
