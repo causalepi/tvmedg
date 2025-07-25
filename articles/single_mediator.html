@@ -166,14 +166,14 @@ using 1000 Monte Carlo samples.</p>
 <span>                   montecarlo <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>                   boot <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>                   parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.3 </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0 </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0.1 </span></span>
-<span><span class="co">#&gt; Indirect (rIE): 0.3 </span></span>
-<span><span class="co">#&gt; Direct (rDE): -0.1 </span></span>
+<span><span class="co">#&gt; Q(a,a): 0.2 </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.1 </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0 </span></span>
+<span><span class="co">#&gt; Indirect (rIE): 0.1 </span></span>
+<span><span class="co">#&gt; Direct (rDE): 0.1 </span></span>
 <span><span class="co">#&gt; Total (rTE): 0.2 </span></span>
-<span><span class="co">#&gt; Proportional explain: 1.5 </span></span>
-<span><span class="co">#&gt; Total time elapsed: 5.262235 secs</span></span>
+<span><span class="co">#&gt; Proportional explain: 0.5 </span></span>
+<span><span class="co">#&gt; Total time elapsed: 5.373425 secs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -214,14 +214,14 @@ example, we run only 5 bootstrap iterations.</p>
 <span>                   nboot <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>                   ci <span class="op">=</span> <span class="fl">.95</span>,</span>
 <span>                   parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.7 (0.06, 1) </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0.6 (0.01, 1) </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0 (0, 0.56) </span></span>
-<span><span class="co">#&gt; Indirect (rIE): 0.1 (0, 0.73) </span></span>
-<span><span class="co">#&gt; Direct (rDE): 0.6 (-0.55, 1) </span></span>
-<span><span class="co">#&gt; Total (rTE): 0.7 (-0.48, 1) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.143 (0, 1.045) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 20.06942 secs</span></span>
+<span><span class="co">#&gt; Q(a,a): 0.8 (0.06, 1) </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.7 (0.01, 1) </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0 (0, 0.55) </span></span>
+<span><span class="co">#&gt; Indirect (rIE): 0.1 (0, 0.64) </span></span>
+<span><span class="co">#&gt; Direct (rDE): 0.7 (-0.54, 1) </span></span>
+<span><span class="co">#&gt; Total (rTE): 0.8 (-0.48, 1) </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.125 (0, 0.917) </span></span>
+<span><span class="co">#&gt; Total time elapsed: 20.62866 secs</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
