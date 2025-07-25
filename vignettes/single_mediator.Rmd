@@ -124,10 +124,6 @@ med_MtoL_ci <- tvmedg(data = sim_data,
 stopCluster(cl)
 ```
 
-
-
-
-
 ### Validation
 
 
@@ -154,30 +150,4 @@ plot(med_MtoL, "tvY")
 ```{r,fig.width=8, fig.height=6,out.width="100%"}
 plot(med_MtoL, "cumY")
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
