@@ -44,15 +44,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck
           needs: check
-
-      - name: Build package without vignettes
-        run: R CMD build --no-build-vignettes .
-
-      - name: Install package
-        run: |
-          PACKAGE_TAR=$(ls *.tar.gz)
-          R CMD INSTALL $PACKAGE_TAR
-
-      - name: Check package
-        run: R CMD check --as-cran *.tar.gz
-
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
