@@ -33,7 +33,7 @@ This example illustrates how to use `tvmedg()` function to conduct time-varying 
 Since, g-computation is computationally intensive, we will leverage parallel computing using the `foreach` and `doParallel` packages to improve efficiency
 
 
-```{r,message=FALSE,eval = FALSE}
+```{r,message=FALSE}
 library(tvmedg)
 head(sim_data)
 ```
@@ -55,7 +55,7 @@ The current version of `tvmedg` supports **lag-based functional forms** for vari
 
 
 
-```{r, warning=FALSE,eval = FALSE}
+```{r, warning=FALSE}
 library(doParallel)
 
 cl <- makeCluster(2)
@@ -94,7 +94,7 @@ stopCluster(cl)
 For illustration purposes, and to reduce computational burden in this example, we run only 5 bootstrap iterations.
 
 
-```{r, warning=FALSE,eval = FALSE}
+```{r, warning=FALSE}
 cl <- makeCluster(2)
 registerDoParallel(cl)
 
@@ -139,7 +139,7 @@ To aid in this evaluation, `tvmedg` provides two diagnostic plots:
 
 **Time-varying plot**
 
-```{r,fig.width=8, fig.height=6,out.width="100%",eval = FALSE}
+```{r,fig.width=8, fig.height=6,out.width="100%"}
 plot(med_MtoL, "tvY")
 ```
 
@@ -147,7 +147,7 @@ plot(med_MtoL, "tvY")
 
 **Cumulative plot**
 
-```{r,fig.width=8, fig.height=6,out.width="100%",eval = FALSE}
+```{r,fig.width=8, fig.height=6,out.width="100%"}
 plot(med_MtoL, "cumY")
 ```
 
