@@ -163,17 +163,17 @@ using 1000 Monte Carlo samples.</p>
 <span>                   sp_df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>                   followup <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>                   seed <span class="op">=</span> <span class="fl">123</span>,</span>
-<span>                   montecarlo <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                   montecarlo <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>                   boot <span class="op">=</span> <span class="cn">F</span>,</span>
 <span>                   parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.5 </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0.3 </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0 </span></span>
-<span><span class="co">#&gt; Indirect (rIE): 0.2 </span></span>
-<span><span class="co">#&gt; Direct (rDE): 0.3 </span></span>
-<span><span class="co">#&gt; Total (rTE): 0.5 </span></span>
-<span><span class="co">#&gt; Proportional explain: 0.4 </span></span>
-<span><span class="co">#&gt; Total time elapsed: 4.710823 secs</span></span>
+<span><span class="co">#&gt; Q(a,a): 0.203 </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.045 </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0.009 </span></span>
+<span><span class="co">#&gt; Indirect (rIE): 0.158 </span></span>
+<span><span class="co">#&gt; Direct (rDE): 0.036 </span></span>
+<span><span class="co">#&gt; Total (rTE): 0.194 </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.814 </span></span>
+<span><span class="co">#&gt; Total time elapsed: 6.116749 mins</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -209,19 +209,19 @@ example, we run only 5 bootstrap iterations.</p>
 <span>                   sp_df <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>                   followup <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>                   seed <span class="op">=</span> <span class="fl">123</span>,</span>
-<span>                   montecarlo <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>                   montecarlo <span class="op">=</span> <span class="fl">1000</span>,</span>
 <span>                   boot <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>                   nboot <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>                   ci <span class="op">=</span> <span class="fl">.95</span>,</span>
 <span>                   parallel <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Q(a,a): 0.6 (0.06, 1) </span></span>
-<span><span class="co">#&gt; Q(a,a*): 0.6 (0.01, 1) </span></span>
-<span><span class="co">#&gt; Q(a*,a*): 0 (0, 0.55) </span></span>
-<span><span class="co">#&gt; Indirect (rIE): 0 (0, 0.73) </span></span>
-<span><span class="co">#&gt; Direct (rDE): 0.6 (-0.54, 1) </span></span>
-<span><span class="co">#&gt; Total (rTE): 0.6 (-0.48, 1) </span></span>
-<span><span class="co">#&gt; Proportional explain: 0 (0, 0.917) </span></span>
-<span><span class="co">#&gt; Total time elapsed: 19.87348 secs</span></span>
+<span><span class="co">#&gt; Q(a,a): 0.817 (0, 0.921) </span></span>
+<span><span class="co">#&gt; Q(a,a*): 0.792 (0, 0.906) </span></span>
+<span><span class="co">#&gt; Q(a*,a*): 0 (0, 0.27) </span></span>
+<span><span class="co">#&gt; Indirect (rIE): 0.025 (-0.015, 0.145) </span></span>
+<span><span class="co">#&gt; Direct (rDE): 0.792 (-0.264, 0.906) </span></span>
+<span><span class="co">#&gt; Total (rTE): 0.817 (-0.205, 0.921) </span></span>
+<span><span class="co">#&gt; Proportional explain: 0.031 (-0.286, 0.701) </span></span>
+<span><span class="co">#&gt; Total time elapsed: 30.96388 mins</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">stopCluster</a></span><span class="op">(</span><span class="va">cl</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
