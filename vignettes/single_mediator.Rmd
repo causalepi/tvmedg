@@ -78,7 +78,7 @@ med_MtoL <- tvmedg(data = sim_data,
                    sp_df = c(3),
                    followup = 12,
                    seed = 123,
-                   montecarlo = 10,
+                   montecarlo = 1000,
                    boot = F,
                    parallel = TRUE)
 stopCluster(cl)
@@ -94,7 +94,7 @@ stopCluster(cl)
 For illustration purposes, and to reduce computational burden in this example, we run only 5 bootstrap iterations.
 
 
-```{r, warning=FALSE}
+```{r, warning=FALSE,message=FALSE}
 cl <- makeCluster(2)
 registerDoParallel(cl)
 
@@ -116,7 +116,7 @@ med_MtoL_ci <- tvmedg(data = sim_data,
                    sp_df = c(3),
                    followup = 12,
                    seed = 123,
-                   montecarlo = 10,
+                   montecarlo = 1000,
                    boot = T,
                    nboot = 5,
                    ci = .95,
