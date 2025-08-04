@@ -67,6 +67,7 @@ cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
+       id = "id",
        basec = c("age","sex","ow","risk"),
        expo = c("Ap"),
        med = c("Mp"),
@@ -86,14 +87,14 @@ op <- tvmedg(data = sim_data,
        montecarlo = 1000,
        boot = F,
        parallel = TRUE)
-#> Q(a,a): 0.213 
-#> Q(a,a*): 0.041 
-#> Q(a*,a*): 0.011 
-#> Indirect: 0.172 
-#> Direct: 0.03 
-#> Total: 0.202 
-#> Proportional explain: 0.851 
-#> Total time elapsed: 6.460357 mins
+#> Q(a,a): 0.222 
+#> Q(a,a*): 0.033 
+#> Q(a*,a*): 0.014 
+#> Indirect (rIE): 0.189 
+#> Direct (rDE): 0.019 
+#> Total (rTE): 0.208 
+#> Proportional explain: 0.909 
+#> Total time elapsed: 2.758889 mins
 
 stopCluster(cl)
 ```

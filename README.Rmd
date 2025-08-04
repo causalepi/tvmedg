@@ -54,6 +54,7 @@ cl <- makeCluster(8)
 registerDoParallel(cl)
 
 op <- tvmedg(data = sim_data,
+       id = "id",
        basec = c("age","sex","ow","risk"),
        expo = c("Ap"),
        med = c("Mp"),
