@@ -15,6 +15,7 @@
 #' @param sp_list splines list
 #' @param sp_type splines type
 #' @param sp_df spines degree of freedom
+#' @param id patient id
 #'
 #' @importFrom purrr keep
 #' @importFrom dplyr mutate group_by select starts_with
@@ -24,7 +25,7 @@
 #' @return
 #' a data frame with lag of exposure, mediator, time-varying variable
 #' @export
-process_data <- function(basec, expo, med, tvar, lag, outc, time,
+process_data <- function(id,basec, expo, med, tvar, lag, outc, time,
                          norev = NULL, tvar_to_med = FALSE,
                          cont_exp = FALSE, cont_exp_std = FALSE,
                          sp_list = NULL,
@@ -120,7 +121,7 @@ process_data <- function(basec, expo, med, tvar, lag, outc, time,
   ## column names of time-fixed variables
   name_v <- paste0("v",1:length(basec))
 
-  out <- data.frame(id = data$id) |>
+  out <- data.frame(id = data[id]) |>
     mutate(data[,basec]) |>
     magrittr::set_colnames(c("id",name_v))
 

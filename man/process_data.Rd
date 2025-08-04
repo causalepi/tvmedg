@@ -5,6 +5,7 @@
 \title{Process data}
 \usage{
 process_data(
+  id,
   basec,
   expo,
   med,
@@ -23,6 +24,8 @@ process_data(
 )
 }
 \arguments{
+\item{id}{patient id}
+
 \item{basec}{time-fixed variables}
 
 \item{expo}{exposure variable}

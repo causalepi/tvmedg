@@ -105,6 +105,7 @@ MC_list2 <- split(MC, by = "idsim", keep.by = TRUE)
 ##
 set.seed(123)
 fitR2 <- process_data(
+  id = "id",
   basec = c("age","sex","ow","risk"),
   expo = c("Ap"),
   med = c("Mp"),

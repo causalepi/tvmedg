@@ -64,6 +64,7 @@ dat <- sim_data |>
 
 ## package
 data_pro <- process_data(
+  id = "id",
   basec = c("age","sex","ow","risk"),
   expo = c("Ap"),
   med = c("Mp"),

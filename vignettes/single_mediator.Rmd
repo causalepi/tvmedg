@@ -61,6 +61,7 @@ library(doParallel)
 cl <- makeCluster(2)
 registerDoParallel(cl)
 med_MtoL <- tvmedg(data = sim_data,
+                   id = "id",
                    basec = c("age","sex","ow","risk"),
                    expo = c("Ap"),
                    med = c("Mp"),
@@ -78,7 +79,7 @@ med_MtoL <- tvmedg(data = sim_data,
                    sp_df = c(3),
                    followup = 12,
                    seed = 123,
-                   montecarlo = 1000,
+                   montecarlo = 10,
                    boot = F,
                    parallel = TRUE)
 stopCluster(cl)
@@ -99,28 +100,29 @@ cl <- makeCluster(2)
 registerDoParallel(cl)
 
 med_MtoL_ci <- tvmedg(data = sim_data,
-                   basec = c("age","sex","ow","risk"),
-                   expo = c("Ap"),
-                   med = c("Mp"),
-                   tvar = c("L1","L2","L3"),
-                   outc = c("Yp"),
-                   time = c("mm"),
-                   lag = 2,
-                   tvar_to_med = F,
-                   cont_exp = F,
-                   mreg = "binomial",
-                   lreg = c("binomial","gaussian","gaussian"),
-                   yreg = "binomial",
-                   sp_list = c("mm"),
-                   sp_type = c("bs"),
-                   sp_df = c(3),
-                   followup = 12,
-                   seed = 123,
-                   montecarlo = 1000,
-                   boot = T,
-                   nboot = 5,
-                   ci = .95,
-                   parallel = TRUE)
+                      id = "id",
+                      basec = c("age","sex","ow","risk"),
+                      expo = c("Ap"),
+                      med = c("Mp"),
+                      tvar = c("L1","L2","L3"),
+                      outc = c("Yp"),
+                      time = c("mm"),
+                      lag = 2,
+                      tvar_to_med = F,
+                      cont_exp = F,
+                      mreg = "binomial",
+                      lreg = c("binomial","gaussian","gaussian"),
+                      yreg = "binomial",
+                      sp_list = c("mm"),
+                      sp_type = c("bs"),
+                      sp_df = c(3),
+                      followup = 12,
+                      seed = 123,
+                      montecarlo = 10,
+                      boot = T,
+                      nboot = 5,
+                      ci = .95,
+                     parallel = TRUE)
 stopCluster(cl)
 ```
 

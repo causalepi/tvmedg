@@ -114,6 +114,7 @@ fitR <- list(fitM1, fitY, fitT1, fitT2, fitT3)
 ## package
 set.seed(123)
 fitR2 <- process_data(
+  id = "id",
   basec = c("age","sex","ow","risk"),
   expo = c("Ap"),
   med = c("Mp"),

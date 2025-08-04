@@ -6,6 +6,7 @@
 \usage{
 tvmedg(
   data,
+  id,
   basec,
   expo,
   med,
@@ -34,6 +35,8 @@ tvmedg(
 }
 \arguments{
 \item{data}{input data}
+
+\item{id}{patient id}
 
 \item{basec}{time-fixed variables}
 

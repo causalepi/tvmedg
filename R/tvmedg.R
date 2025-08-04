@@ -26,6 +26,7 @@
 #' @param sp_type splines type
 #' @param sp_df spines degree of freedom
 #' @param followup length of follow up
+#' @param id patient id
 #'
 #' @importFrom dplyr bind_rows
 #' @importFrom foreach %dopar% foreach
@@ -33,7 +34,7 @@
 #' @return
 #' Q11, Q10, Q00
 #' @export
-tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
+tvmedg <- function(data, id,basec, expo, med, tvar, outc, time, lag = 2,
                    norev = NULL, cont_exp = FALSE, cont_exp_std = FALSE,
                    tvar_to_med = FALSE,
                    mreg = NULL,
@@ -58,6 +59,7 @@ tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
   ## point estimate
 
   fitR2 <- process_data(
+    id = id,
     basec = basec,
     expo = expo,
     med = med,
@@ -119,6 +121,7 @@ tvmedg <- function(data, basec, expo, med, tvar, outc, time, lag = 2,
 
       ## boostrap
       fitR2a <- process_data(
+        id = id,
         basec = basec,
         expo = expo,
         med = med,
