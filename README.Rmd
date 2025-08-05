@@ -71,7 +71,7 @@ op <- tvmedg(data = sim_data,
        sp_df = c(3),
        followup = 12,
        seed = 123,
-       montecarlo = 100,
+       montecarlo = 1000,
        boot = F,
        parallel = TRUE)
 

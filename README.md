@@ -84,17 +84,17 @@ op <- tvmedg(data = sim_data,
        sp_df = c(3),
        followup = 12,
        seed = 123,
-       montecarlo = 100,
+       montecarlo = 1000,
        boot = F,
        parallel = TRUE)
-#> Q(a,a): 0.15 
-#> Q(a,a*): 0.02 
-#> Q(a*,a*): 0.02 
-#> Indirect (rIE): 0.13 
-#> Direct (rDE): 0 
-#> Total (rTE): 0.13 
-#> Proportional explain: 1 
-#> Total time elapsed: 19.29224 secs
+#> Q(a,a): 0.188 
+#> Q(a,a*): 0.037 
+#> Q(a*,a*): 0.008 
+#> Indirect (rIE): 0.151 
+#> Direct (rDE): 0.029 
+#> Total (rTE): 0.18 
+#> Proportional explain: 0.839 
+#> Total time elapsed: 5.774524 mins
 
 stopCluster(cl)
 ```
